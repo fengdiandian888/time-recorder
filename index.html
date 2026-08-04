@@ -177,6 +177,17 @@ display:inline-flex;align-items:center;gap:7px;font-size:13.5px;font-weight:500;
 .hslot.lk{cursor:not-allowed}
 .hslot:active .hfill{opacity:.6}
 .hslot.now .hfill{background:var(--red-l)}
+.hslot.plan .hfill{box-sizing:border-box}
+.hslot.plan.arrived .hfill{animation:planpulse 1.5s ease-in-out infinite}
+@keyframes planpulse{0%,100%{opacity:1}50%{opacity:.5}}
+.planitem{display:flex;align-items:center;gap:8px;padding:9px 4px;border-bottom:1px solid #F0EFEA;font-size:13px;cursor:pointer}
+.planitem:last-child{border-bottom:none}
+.planitem .pstripe{width:4px;height:18px;border-radius:2px;flex:none}
+.planitem .ptm{font-variant-numeric:tabular-nums;color:#454545;font-weight:600;min-width:42px}
+.planitem .pcat{font-weight:600}
+.planitem .pnote{color:#9a9a92;flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.planitem.arrived{background:#FBF7EF}
+.planitem .pbadge{font-size:11px;color:#B8860B;background:#FFF3D6;padding:1px 7px;border-radius:9px;flex:none}
 .hslot.now:after{content:'现';position:absolute;top:1px;right:2px;font-size:8.5px;color:#fff;background:var(--red);
 padding:0 3px;border-radius:4px;z-index:2;line-height:1.5;pointer-events:none}
 .tlhead{display:flex;align-items:center;gap:8px;margin-top:12px;font-size:12px;color:var(--tx3);flex-wrap:wrap}
@@ -244,6 +255,11 @@ padding:0 3px;border-radius:4px;z-index:2;line-height:1.5;pointer-events:none}
     <button class="dtab" data-d="-1" onclick="setViewDay(-1)">昨天</button>
     <button class="dtab on" data-d="0" onclick="setViewDay(0)">今天</button>
     <button class="dtab" data-d="1" onclick="setViewDay(1)">明天</button>
+  </div>
+  <div class="card daycard" id="planCard" style="display:none;margin-top:12px">
+    <div class="row"><span class="dtitle2">📌 预备安排</span><div class="sp"></div><span class="mut3" id="planCount"></span></div>
+    <div id="planList" style="margin-top:8px"></div>
+    <div class="mut3" style="margin-top:6px;font-size:12px">点时间轴上还没到的格子，就能提前安排。时间到了会自动标「到点」，点一下转成正式记录。</div>
   </div>
   <div class="card daycard" id="dayCard">
     <div class="row"><span class="dtitle2" id="dayTitle">今天的活动</span><div class="sp"></div><span class="mut3" id="dayEmpty"></span></div>
@@ -375,7 +391,7 @@ padding:0 3px;border-radius:4px;z-index:2;line-height:1.5;pointer-events:none}
     <button class="del" onclick="closeEdit()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg></button></div>
   <div style="margin-top:10px"><label class="mut3">时间</label>
     <div class="edtime" id="edTimeRead"></div></div>
-  <div style="margin-top:12px"><label class="mut3">时间段</label>
+  <div style="margin-top:12px" id="edStepsWrap"><label class="mut3">时间段</label>
     <div class="tmrow">
       <span class="tmto">从</span>
       <div class="tmbox"><span class="tmv" id="edFrom">00:00</span></div>
@@ -385,12 +401,14 @@ padding:0 3px;border-radius:4px;z-index:2;line-height:1.5;pointer-events:none}
     </div>
     <div class="mut3" style="margin-top:4px;font-size:12px">点「+ / −」调整结束时间（最多到当前时刻）</div>
   </div>
+  <div id="edPlanHint" class="hint" style="display:none;margin-top:12px">📌 这是还没到的时段，先安排上。等时间到了，再点「转正式记录」。</div>
   <div style="margin-top:12px"><label class="mut3">分类</label>
     <div class="catpick" id="edCats" style="margin-top:6px"></div></div>
   <div class="fld" style="margin-top:12px"><label>具体在做什么</label>
     <input type="text" id="edText" placeholder="">
     <div class="recent" id="edRecent"></div></div>
   <div class="row" style="margin-top:16px;gap:8px">
+    <button class="btn" id="edToRecord" style="display:none" onclick="edToRecord()">转正式记录</button>
     <button class="btn dan" onclick="clearSeg()">清空这段</button><div class="sp"></div>
     <button class="btn" onclick="closeEdit()">取消</button>
     <button class="btn pri" onclick="saveSeg()">保存</button>
@@ -609,7 +627,8 @@ function save(){
     localStorage.setItem(LS+'cfg',JSON.stringify(S.cfg));
   }catch(e){toast('保存失败，存储可能已满')}
 }
-function day(d){if(!S.days[d])S.days[d]={g:EMPTY,t:{},s:'',w:'',m:''};if(!S.days[d].t)S.days[d].t={};if(!S.days[d].gr)S.days[d].gr=[];return S.days[d]}
+function day(d){if(!S.days[d])S.days[d]={g:EMPTY,t:{},s:'',w:'',m:'',p:{}};if(!S.days[d].t)S.days[d].t={};if(!S.days[d].gr)S.days[d].gr=[];if(!S.days[d].p)S.days[d].p={};return S.days[d]}
+function hexA(hex,a){var h=(hex||'#ccc').replace('#','');if(h.length===3)h=h[0]+h[0]+h[1]+h[1]+h[2]+h[2];var r=parseInt(h.substr(0,2),16),g=parseInt(h.substr(2,2),16),b=parseInt(h.substr(4,2),16);return 'rgba('+r+','+g+','+b+','+a+')';}
 function hasDay(d){return !!S.days[d]}
 function cnt(s,c){var n=0;for(var i=0;i<s.length;i++)if(s[i]===c)n++;return n}
 
@@ -643,6 +662,7 @@ function renderRec(){
   renderMood();
   renderGrumble();
   renderSum();
+  renderPlanList();
   updateDayTabs();
   maybeFetchWeather();
 }
@@ -699,11 +719,19 @@ function renderTimeline(){
     h+='<div class="hhour">'+(hh<10?'0'+hh:hh)+':00'+(dayLabel?' <span class="hday">'+dayLabel+'</span>':'')+'</div>';
     h+='<div class="hbody">';
     [s0,s1].forEach(function(s){
-      var g=day(d).g[s];
-      var ed=editable(d,s), isNow=(d===t&&s===ns);
+      var dd=day(d);
+      var g=dd.g[s];
+      var pl=(dd.p&&dd.p[s])?dd.p[s]:null;
+      var isFuture=!absBeforeNow(d,s);
+      var ed=editable(d,s)||isFuture;
+      var isNow=(d===t&&s===ns);
       var cat=(g!=='.'&&CMAP[g])?CMAP[g]:null;
-      var fill=cat?'background:'+cat.c:(g!=='.'?'background:#D9D8D1':'');
-      h+='<div class="hslot'+(isNow?' now':'')+(ed?'':' lk')+'" data-day="'+d+'" data-slot="'+s+'" onclick="tapCell(\''+d+'\','+s+')"><div class="hfill" style="'+fill+'"></div></div>';
+      var planCat=pl?CMAP[pl.c]:null;
+      var fill='', cls='';
+      if(cat){ fill='background:'+cat.c; }
+      else if(pl&&planCat){ fill='background:'+hexA(planCat.c,0.16)+';box-shadow:inset 0 0 0 1.5px '+planCat.c; cls=' plan'+(isFuture?'':' arrived'); }
+      else if(g!=='.'){ fill='background:#D9D8D1'; }
+      h+='<div class="hslot'+(isNow?' now':'')+cls+(ed?'':' lk')+'" data-day="'+d+'" data-slot="'+s+'" onclick="tapCell(\''+d+'\','+s+')"><div class="hfill" style="'+fill+'"></div></div>';
     });
     h+='</div></div>';
   }
@@ -730,7 +758,11 @@ function renderDayList(d){
   document.getElementById('dayEmpty').textContent= empty>0 ? ('空 '+hrs(emptySlots)) : '已填满';
 }
 function tapCell(d,slot){
-  openEdit(d,slot);
+  var dd=day(d);
+  var pl=(dd.p&&dd.p[slot])?dd.p[slot]:null;
+  if(pl){ openPlan(d,slot); return; }            /* 已有计划 → 编辑/转正式 */
+  if(absBeforeNow(d,slot)){ openEdit(d,slot); return; }  /* 已到/过去 → 记录 */
+  openPlan(d,slot);                              /* 未来 → 预备安排 */
 }
 function applyDayLight(){
   document.getElementById('curDate').textContent=fullDate(curDate);
@@ -777,7 +809,22 @@ function openEdit(d,slot){
   edDay=d; edMode='cell'; edA=slot; edToSlot=slot;
   edCat=(dd.g[slot]!=='.')?dd.g[slot]:(S.cfg.lastCat||'.');
   document.getElementById('edText').value=dd.t[slot]||'';
+  document.getElementById('edStepsWrap').style.display='';
+  document.getElementById('edPlanHint').style.display='none';
+  document.getElementById('edToRecord').style.display='none';
   renderEdCats();renderRecent();renderEdSteps();updateEdTitle();
+  document.getElementById('editMask').classList.add('on');
+}
+function openPlan(d,slot){
+  var dd=day(d), pl=(dd.p&&dd.p[slot])||null;
+  edDay=d; edMode='plan'; edA=slot; edToSlot=slot;
+  edCat= pl? (pl.c||'.') : (S.cfg.lastCat||'.');
+  document.getElementById('edText').value= pl? (pl.t||'') : '';
+  document.getElementById('edStepsWrap').style.display='none';
+  document.getElementById('edPlanHint').style.display='block';
+  var arrived=absBeforeNow(d,slot);
+  document.getElementById('edToRecord').style.display=(arrived?'inline-flex':'none');
+  renderEdCats();renderRecent();updateEdTitle();
   document.getElementById('editMask').classList.add('on');
 }
 function quickContinue(k){
@@ -836,11 +883,21 @@ function renderEdSteps(){
   document.getElementById('edTimeRead').textContent=(edMode==='cont'?'接着上一段，从 ':'从 ')+slotLab(edA)+' 到 '+slotLab(edToSlot+1);
 }
 function updateEdTitle(){
-  document.getElementById('edTitle').textContent = edMode==='cont' ? '接着记一段' : (edMode==='cell' ? '编辑这段' : '记录');
+  document.getElementById('edTitle').textContent = edMode==='cont' ? '接着记一段' : (edMode==='cell' ? '编辑这段' : (edMode==='plan' ? '预备安排（计划）' : '记录'));
 }
 function saveSeg(){
-  var d=edDay, dd=day(d), ok=0, blocked=0;
+  var d=edDay, dd=day(d);
   var tx=document.getElementById('edText').value.trim();
+  if(edMode==='plan'){
+    dd.p=dd.p||{};
+    if(edCat==='.'){ delete dd.p[edA]; }
+    else { dd.p[edA]={c:edCat,t:tx}; if(S.cfg.lastCat!==edCat)S.cfg.lastCat=edCat; }
+    if(tx){var r=S.cfg.recent||[];r=r.filter(function(x){return x!==tx});r.unshift(tx);S.cfg.recent=r.slice(0,12);}
+    save();closeEdit();renderRec();renderToday();renderStat();
+    toast(edCat==='.'?'已删除该预备安排':'已安排预备 '+slotLab(edA)+' · '+(CMAP[edCat]?CMAP[edCat].n:'未分类'));
+    return;
+  }
+  var ok=0, blocked=0;
   for(var i=edA;i<=edToSlot;i++){
     if(!editable(d,i)){blocked++;continue;}
     var g=dd.g.split(''); g[i]=edCat; dd.g=g.join('');
@@ -854,9 +911,43 @@ function saveSeg(){
   toast(ok?('已记录 '+hrs(ok)+(blocked?'（'+blocked+' 格暂不可填）':'')):'没有可记录的时段');
 }
 function clearSeg(){
-  var d=edDay, dd=day(d), ok=0;
+  var d=edDay, dd=day(d);
+  if(edMode==='plan'){ if(dd.p)delete dd.p[edA]; save();closeEdit();renderRec();renderToday();renderStat();toast('已删除预备安排'); return; }
+  var ok=0;
   for(var i=edA;i<=edToSlot;i++){if(!editable(d,i))continue;var g=dd.g.split('');g[i]='.';delete dd.t[i];dd.g=g.join('');ok++}
   save();closeEdit();renderRec();renderToday();renderStat();toast('已清空 '+hrs(ok));
+}
+function edToRecord(d,s){
+  if(d===undefined){d=edDay;s=edA;}
+  var dd=day(d), pl=(dd.p&&dd.p[s])||null;
+  if(!pl){closeEdit();return;}
+  if(!editable(d,s)){toast('这段还不可转为正式记录');return;}
+  var g=dd.g.split(''); g[s]=pl.c; dd.g=g.join('');
+  if(pl.t)dd.t[s]=pl.t; else delete dd.t[s];
+  delete dd.p[s];
+  if(S.cfg.lastCat!==pl.c)S.cfg.lastCat=pl.c;
+  save();closeEdit();renderRec();renderToday();renderStat();
+  toast('已转为正式记录 '+slotLab(s)+' · '+(CMAP[pl.c]?CMAP[pl.c].n:'未分类'));
+}
+function renderPlanList(){
+  var d=curDate, dd=day(d), p=dd.p||{};
+  var keys=Object.keys(p).map(Number).filter(function(s){return p[s]}).sort(function(a,b){return a-b});
+  var card=document.getElementById('planCard');
+  if(!keys.length){card.style.display='none';return;}
+  card.style.display='block';
+  document.getElementById('planCount').textContent=keys.length+' 项';
+  var h=keys.map(function(s){
+    var pl=p[s], cat=CMAP[pl.c]||LIFE, arrived=absBeforeNow(d,s);
+    var note=pl.t?(' · '+esc(pl.t)):'';
+    return '<div class="planitem'+(arrived?' arrived':'')+'" onclick="'+(arrived?('edToRecord(\''+d+'\','+s+')'):('openPlan(\''+d+'\','+s+')'))+'">'+
+      '<span class="pstripe" style="background:'+cat.c+'"></span>'+
+      '<span class="ptm">'+slotLab(s)+'</span>'+
+      '<span class="pcat" style="color:'+cat.c+'">'+esc(cat.n)+'</span>'+
+      '<span class="pnote">'+note+'</span>'+
+      (arrived?'<span class="pbadge">到点·点此转正式</span>':'')+
+      '</div>';
+  }).join('');
+  document.getElementById('planList').innerHTML=h;
 }
 function closeEdit(){document.getElementById('editMask').classList.remove('on')}
 
