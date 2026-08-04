@@ -130,7 +130,9 @@ nav{margin-left:-12px;margin-right:-12px}
 .hd-big{font-size:22px;font-weight:700;color:#222;line-height:1.12;letter-spacing:.3px}
 .hd-sub{font-size:12.5px;color:#8a8a82;margin-top:4px;display:flex;align-items:center;gap:8px}
 .wxlabel{color:#9a9a92}
-.wxauto{display:inline-flex;align-items:center;gap:6px;background:#fff;border:1px solid var(--line2);border-radius:20px;padding:5px 12px;font-size:13px;color:var(--tx);min-height:28px}
+.hd-week{font-size:13px;font-weight:500;color:var(--tx2);margin-left:8px}
+.wxauto{display:inline-flex;align-items:center;gap:5px;background:#fff;border:1px solid var(--line2);border-radius:20px;padding:5px 12px;font-size:13px;color:var(--tx);min-height:28px}
+.wxauto .wlbl{font-size:12px;color:var(--tx3);margin-right:1px}
 .wxauto .we{font-size:16px;line-height:1;flex:none}
 .wxauto .wtt{font-size:13px;color:var(--tx2)}
 .wxauto.load .we{animation:spin .8s linear infinite;display:inline-block}
@@ -212,23 +214,15 @@ padding:0 3px;border-radius:4px;z-index:2;line-height:1.5;pointer-events:none}
 <body>
 <div class="wrap">
 
-<header>
-  <div class="logo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3.5 2"/></svg></div>
-  <h1>24小时时间记录台</h1>
-  <div class="sp"></div>
-  <button class="btn sm" onclick="exportJSON()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12M8 11l4 4 4-4M4 19h16"/></svg>导出</button>
-  <button class="btn sm" onclick="document.getElementById('impf').click()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 17V5M8 9l4-4 4 4M4 19h16"/></svg>导入</button>
-  <button class="btn sm" onclick="quickSync()" title="同步到云端">☁️</button>
+<header style="display:none">
   <input type="file" id="impf" accept=".json" style="display:none" onchange="importJSON(this)">
 </header>
 
 <section class="pane on" id="p-rec">
   <div class="recbar">
     <div class="hd-left">
-      <div class="hd-big" id="curDate"></div>
-      <div class="hd-sub"><span id="curWeek"></span><span class="wxlabel">天气</span>
-        <span class="wxauto" id="wxAuto" title="自动获取当前天气"><span class="we">🌤</span><span class="wtt">获取中…</span></span>
-      </div>
+      <div class="hd-big"><span id="curDate"></span><span class="hd-week" id="curWeek"></span></div>
+      <div class="hd-sub"><span class="wxauto" id="wxAuto" title="自动获取当前天气"><span class="wlbl">天气</span><span class="we">🌤</span><span class="wtt">获取中…</span></span></div>
     </div>
     <div class="hd-right">
       <div class="tdbadge" id="tdBadge" onclick="openToday()"><span class="tdn" id="tdNum">0</span><span class="tdl">待处理</span></div>
@@ -321,7 +315,7 @@ padding:0 3px;border-radius:4px;z-index:2;line-height:1.5;pointer-events:none}
       <span style="font-size:13px">自动获取天气</span>
       <span class="mut3" style="flex:1;min-width:120px">打开页面及切换日期时自动获取当前地区天气并保存</span>
     </div>
-    <p class="mut3" style="margin-top:8px;font-size:12px">也可在记录页顶部手动点 ☀️晴/⛅多云/☁️阴/🌧️雨/❄️雪/🌫️雾 选天气、填温度；📍 按钮随时重新获取。统计页日/周/年视图都会展示当天天气。</p>
+    <p class="mut3" style="margin-top:8px;font-size:12px">天气会自动获取当前地区并保存到当天，无需手动填写。统计页日/周/年视图都会展示当天天气。</p>
   </div>
   <div class="card">
     <h2>数据</h2>
