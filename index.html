@@ -220,6 +220,24 @@ padding:0 3px;border-radius:4px;z-index:2;line-height:1.5;pointer-events:none}
  .recbar{padding:8px 12px 10px}
  .hd-big{font-size:20px}
 }
+.rtrow{display:flex;align-items:center;gap:6px;margin-bottom:7px;flex-wrap:wrap}
+.rtrow select{min-height:38px;padding:6px 8px;border:1px solid var(--line2);border-radius:8px;background:#fff;font-size:13px}
+.rtrow input[type=text]{flex:1;min-width:90px;min-height:38px}
+.rtdash{color:var(--tx3)}
+.goalrow{display:flex;align-items:center;gap:9px;margin-bottom:9px;font-size:13px}
+.goalrow .gnm{width:46px;flex:none;color:var(--tx2);display:flex;align-items:center;gap:5px}
+.goalrow .gnm i{width:10px;height:10px;border-radius:3px;flex:none}
+.goalrow .gbar{flex:1;height:16px;background:#F0EFEA;border-radius:4px;overflow:hidden;position:relative}
+.goalrow .gbar i{display:block;height:100%;border-radius:4px;transition:width .3s}
+.goalrow .gv{position:absolute;inset:0;display:flex;align-items:center;justify-content:flex-end;padding-right:6px;font-size:11px;color:#454545;font-variant-numeric:tabular-nums}
+.goalrow .gv.over{color:#0F6E56;font-weight:600}
+.goalrow input.gval{width:56px;min-height:34px;padding:5px 7px;border:1px solid var(--line2);border-radius:8px;text-align:center;font-size:13px}
+.remind{background:#FFF6E6;border:1px solid #F0D9AC;border-radius:12px;padding:11px 12px}
+.remind .rtitle{display:flex;align-items:center;gap:7px;font-size:13.5px;font-weight:600;color:#854F0B}
+.ritem{display:flex;align-items:center;gap:8px;margin-top:8px;padding:8px 10px;background:#fff;border:1px solid #F0D9AC;border-radius:9px}
+.ritem .riic{width:4px;height:18px;border-radius:2px;flex:none}
+.ritem .ritm{font-variant-numeric:tabular-nums;font-weight:600;color:#454545}
+.ritem .rinm{flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 </style>
 </head>
 <body>
@@ -240,6 +258,11 @@ padding:0 3px;border-radius:4px;z-index:2;line-height:1.5;pointer-events:none}
       <button class="btn pri rec" onclick="recNow()">记现在</button>
     </div>
   </div>
+  <div class="rectools">
+    <button class="btn sm pri" onclick="applyRoutine(curDate)">🗓 套用今日作息</button>
+    <span class="mut3">把日常安排一键铺到「<span id="applyDayLbl"></span>」（过去变记录、未来变计划）</span>
+  </div>
+  <div id="remindBanner" style="display:none"></div>
   <div id="lockNote" class="hint" style="display:none"></div>
   <div class="sumbar sumsticky" id="sumbar"></div>
   <div class="moodbar">
@@ -291,6 +314,11 @@ padding:0 3px;border-radius:4px;z-index:2;line-height:1.5;pointer-events:none}
     <p class="mut3" style="margin-top:4px">不用额外录入，全部从时间表算出来</p>
     <div id="derive"></div>
   </div>
+  <div class="card" id="goalCard">
+    <div class="row"><h2>🎯 本周目标</h2><div class="sp"></div><span class="mut3" id="goalWeekRange"></span></div>
+    <p class="mut3" style="margin-top:4px">每周各分类的时间目标，对比本周实际进度。在「设置」里可调。</p>
+    <div id="goalBody" style="margin-top:10px"></div>
+  </div>
 </section>
 
 <section class="pane" id="p-idea">
@@ -332,6 +360,25 @@ padding:0 3px;border-radius:4px;z-index:2;line-height:1.5;pointer-events:none}
       <span class="mut3" style="flex:1;min-width:120px">打开页面及切换日期时自动获取当前地区天气并保存</span>
     </div>
     <p class="mut3" style="margin-top:8px;font-size:12px">天气会自动获取当前地区并保存到当天，无需手动填写。统计页日/周/年视图都会展示当天天气。</p>
+  </div>
+  <div class="card">
+    <h2>作息模板</h2>
+    <p class="mut3" style="margin-top:4px">你的日常安排。在记录页点「🗓 套用今日作息」即可一键铺到当天（过去的时段变记录、未来的时段变计划）。</p>
+    <div id="routineList" style="margin-top:10px"></div>
+    <button class="btn sm" style="margin-top:8px" onclick="addRoutine()">+ 添加一行</button>
+  </div>
+  <div class="card">
+    <h2>时间目标（每周）</h2>
+    <p class="mut3" style="margin-top:4px">设置每类活动的周目标小时数，统计页「本周目标」会对比实际进度。</p>
+    <div id="goalList" style="margin-top:10px"></div>
+  </div>
+  <div class="card">
+    <h2>到点提醒</h2>
+    <div class="row" style="margin-top:8px;gap:7px;cursor:pointer" onclick="toggleNotify()">
+      <div class="sw2" id="notifySw"><b></b></div>
+      <span style="font-size:13px">系统通知（预备安排到点时弹窗）</span>
+      <span class="mut3" style="flex:1;min-width:120px">需浏览器授权；即使不授权，记录页顶部也会显示提醒条</span>
+    </div>
   </div>
   <div class="card">
     <h2>数据</h2>
@@ -665,6 +712,7 @@ function renderRec(){
   renderPlanList();
   updateDayTabs();
   maybeFetchWeather();
+  checkReminders();
 }
 /* 旧滚动坐标系（AXIS/axisLab/rangeLabel/coord*）已废弃，未再调用 */
 function slotCells(d,a,b){var o=[];for(var i=a;i<=b;i++)o.push({day:d,slot:i});return o;}
@@ -767,6 +815,7 @@ function tapCell(d,slot){
 function applyDayLight(){
   document.getElementById('curDate').textContent=fullDate(curDate);
   document.getElementById('curWeek').textContent=wk(curDate);
+  var adl=document.getElementById('applyDayLbl');if(adl)adl.textContent=(curDate===todayStr()?'今天':cnDate(curDate));
   renderWxAuto();
   var ln=document.getElementById('lockNote');
   if(permLocked(curDate)){ln.style.display='block';ln.textContent='这一天已超过补记窗口（仅今天和昨天可改），永久只读。';}
@@ -1070,7 +1119,7 @@ function renderStat(){
   h+='<div style="margin-top:16px">'+catBars(st.c,st.tot)+'</div>';
   h+=weatherReview(r.ds)+moodReview(r.ds);
   if(sv==='year'&&st.rec<90)h+='<div class="hint">已记录 '+st.rec+' 天，再有约 '+(90-st.rec)+' 天，年度规律才会真正显现。</div>';
-  document.getElementById('statBody').innerHTML=h;renderDerive();
+  document.getElementById('statBody').innerHTML=h;renderDerive();renderGoals();
 }
 function dayWeather(d){var w=wxOf(d);if(!w)return '';
   return '<div class="wxstat">'+wxEmoji(w)+'<span>'+esc(w)+'</span></div>';
@@ -1355,7 +1404,8 @@ function clearAll(){
 function setPane(p){
   document.querySelectorAll('.pane').forEach(function(s){s.classList.toggle('on',s.id==='p-'+p)});
   document.querySelectorAll('.nvb').forEach(function(b){b.classList.toggle('on',b.dataset.p===p)});
-  if(p==='stat')renderStat();if(p==='set'){renderCatMgr();refreshCloudStat();}
+  if(p==='stat'){renderStat();renderGoals();}
+  if(p==='set'){renderCatMgr();refreshCloudStat();renderRoutine();renderGoalList();document.getElementById('notifySw').classList.toggle('on',S.cfg.notify);}
   window.scrollTo({top:0,behavior:'smooth'});
 }
 var _cb=null;
@@ -1412,13 +1462,117 @@ function seed(){
   if(S.cfg.seeded)return;
   S.cfg.seeded=1;save();
 }
+/* ===== 作息模板 / 目标 / 提醒 ===== */
+var DEFROUTINE=[
+ {a:0,e:14,k:'L',t:'睡觉'},
+ {a:14,e:15,k:'4',t:'走路'},
+ {a:15,e:17,k:'L',t:'洗漱早餐'},
+ {a:17,e:24,k:'4',t:'骑车通勤'},
+ {a:24,e:25,k:'L',t:'午餐'},
+ {a:25,e:36,k:'4',t:'走路'},
+ {a:36,e:37,k:'4',t:'骑车回家'},
+ {a:37,e:39,k:'L',t:'晚餐'}
+];
+var DEFGOALS={1:12,2:45,3:10,4:7,5:4};
+function ensureCfg(){
+  if(!S.cfg.routine)S.cfg.routine=DEFROUTINE.map(function(x){return {a:x.a,e:x.e,k:x.k,t:x.t}});
+  if(!S.cfg.goals)S.cfg.goals=JSON.parse(JSON.stringify(DEFGOALS));
+  if(S.cfg.notify===undefined)S.cfg.notify=false;
+  save();
+}
+function slotOpts(sel){var h='';for(var i=0;i<48;i++){h+='<option value="'+i+'"'+(+sel===i?' selected':'')+'>'+slotLab(i)+'</option>'};return h}
+function catOpts(sel){var h='';CATS.concat([LIFE]).forEach(function(c){h+='<option value="'+c.k+'"'+(sel===c.k?' selected':'')+'>'+esc(c.n)+'</option>'});return h}
+function renderRoutine(){
+  var rt=S.cfg.routine||[], h='';
+  rt.forEach(function(seg,i){
+    h+='<div class="rtrow"><select onchange="S.cfg.routine['+i+'].a=+this.value;saveRoutine()">'+slotOpts(seg.a)+'</select>'+
+      '<span class="rtdash">至</span><select onchange="S.cfg.routine['+i+'].e=+this.value;saveRoutine()">'+slotOpts(seg.e)+'</select>'+
+      '<select onchange="S.cfg.routine['+i+'].k=this.value;saveRoutine()">'+catOpts(seg.k)+'</select>'+
+      '<input type="text" value="'+esc(seg.t||'')+'" placeholder="内容" onchange="S.cfg.routine['+i+'].t=this.value;saveRoutine()">'+
+      '<button class="del" onclick="delRoutine('+i+')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg></button></div>';
+  });
+  document.getElementById('routineList').innerHTML=h||'<div class="mut3" style="font-size:12px">还没有模板，点「+ 添加一行」。</div>';
+}
+function saveRoutine(){save()}
+function addRoutine(){S.cfg.routine=S.cfg.routine||[];S.cfg.routine.push({a:0,e:2,k:'4',t:''});save();renderRoutine()}
+function delRoutine(i){S.cfg.routine.splice(i,1);save();renderRoutine()}
+function applyRoutine(d){
+  var rt=S.cfg.routine||[];
+  if(!rt.length){toast('先在设置里配置作息模板');setPane('set');return;}
+  var dd=day(d), ns=(d===todayStr())?nowSlot():999, recN=0,planN=0,skip=0;
+  rt.forEach(function(seg){
+    for(var i=seg.a;i<seg.e;i++){
+      if(i<0||i>47)continue;
+      var isAutoSleep=(dd.g[i]==='L'&&dd.t[i]==='睡觉');
+      if(((dd.g[i]!=='.')&&!isAutoSleep)||(dd.p&&dd.p[i])){skip++;continue;}
+      var isPast=(d===todayStr())?(i<=ns):(diffD(todayStr(),d)>0);
+      if(isPast){var g=dd.g.split('');g[i]=seg.k;dd.g=g.join('');if(seg.t)dd.t[i]=seg.t;else delete dd.t[i];recN++;}
+      else{dd.p=dd.p||{};if(!dd.p[i])dd.p[i]={c:seg.k,t:seg.t||''};planN++;}
+    }
+  });
+  save();renderRec();renderToday();renderStat();
+  toast('已套用作息：'+recN+' 段记录 + '+planN+' 段计划'+(skip?('（'+skip+' 段已有，跳过）'):''));
+}
+function weekDays(){var t=new Date(),dw=(t.getDay()+6)%7;var st=new Date(t);st.setDate(t.getDate()-dw);var out=[];for(var i=0;i<7;i++)out.push(ymd(new Date(st.getFullYear(),st.getMonth(),st.getDate()+i)));return out}
+function renderGoals(){
+  var ge=document.getElementById('goalWeekRange');if(ge)ge.textContent='';
+  var gb=document.getElementById('goalBody');if(!gb)return;
+  var wd=weekDays(), st=tally(wd);
+  if(ge)ge.textContent=cnDate(wd[0]).replace(/ 周./,'')+' — '+cnDate(wd[6]).replace(/ 周./,'');
+  var goals=S.cfg.goals||{}, h='';
+  CATS.forEach(function(x){
+    var goal=goals[x.k]||0; if(goal<=0)return;
+    var act=st.c[x.k]/2, pct=Math.min(act/goal*100,100), over=act>=goal;
+    h+='<div class="goalrow"><span class="gnm"><i style="background:'+x.c+'"></i>'+esc(x.n)+'</span>'+
+      '<div class="gbar"><i style="width:'+pct.toFixed(0)+'%;background:'+x.c+'"></i><span class="gv'+(over?' over':'')+'">'+act.toFixed(1)+' / '+goal+'h</span></div></div>';
+  });
+  gb.innerHTML=h||'<div class="mut3" style="font-size:12px">还没设置目标，去设置里填每类每周小时数。</div>';
+}
+function renderGoalList(){
+  var goals=S.cfg.goals||{}, h='';
+  CATS.forEach(function(x){
+    h+='<div class="goalrow"><span class="gnm"><i style="background:'+x.c+'"></i>'+esc(x.n)+'</span>'+
+      '<input class="gval" type="number" min="0" step="0.5" value="'+(goals[x.k]||0)+'" onchange="setGoal(\''+x.k+'\',this.value)"> <span class="mut3">小时/周</span></div>';
+  });
+  document.getElementById('goalList').innerHTML=h;
+}
+function setGoal(k,v){S.cfg.goals=S.cfg.goals||{};S.cfg.goals[k]=Math.max(0,parseFloat(v)||0);save();renderGoals();}
+function toggleNotify(){
+  if(S.cfg.notify){S.cfg.notify=false;save();document.getElementById('notifySw').classList.remove('on');toast('已关闭系统通知');return;}
+  if(!('Notification' in window)){toast('当前浏览器不支持系统通知');return;}
+  Notification.requestPermission().then(function(p){S.cfg.notify=(p==='granted');save();document.getElementById('notifySw').classList.toggle('on',S.cfg.notify);
+    if(S.cfg.notify){toast('已开启，到点会弹通知');checkReminders();}else toast('未授权，仍会在页面内提醒');});
+}
+function checkReminders(){
+  var d=todayStr(), dd=day(d), p=dd.p||{}, ns=nowSlot(), arr=[];
+  Object.keys(p).forEach(function(k){var s=+k;if(s<=ns&&p[s])arr.push({s:s,pl:p[s]})});
+  renderRemindBanner(arr);
+  if(S.cfg.notify&&'Notification' in window&&Notification.permission==='granted'){
+    S.cfg.notified=S.cfg.notified||{};
+    arr.forEach(function(a){var key=d+'#'+a.s;if(!S.cfg.notified[key]){S.cfg.notified[key]=1;save();
+      try{new Notification('时间到 · 该做啦',{body:slotLab(a.s)+' '+(CMAP[a.pl.c]?CMAP[a.pl.c].n:'')+(a.pl.t?(' · '+a.pl.t):'')});}catch(e){}}});
+  }
+}
+function renderRemindBanner(arr){
+  var el=document.getElementById('remindBanner');if(!el)return;
+  if(!arr.length){el.style.display='none';el.innerHTML='';return;}
+  var h='<div class="remind"><div class="rtitle">⏰ 有 '+arr.length+' 项预备安排到时间了</div>';
+  arr.sort(function(a,b){return a.s-b.s}).forEach(function(a){
+    var cat=CMAP[a.pl.c]||LIFE;
+    h+='<div class="ritem"><span class="riic" style="background:'+cat.c+'"></span><span class="ritm">'+slotLab(a.s)+'</span>'+
+      '<span class="rinm"><b style="color:'+cat.c+'">'+esc(cat.n)+'</b>'+(a.pl.t?(' · '+esc(a.pl.t)):'')+'</span>'+
+      '<button class="btn sm pri" onclick="edToRecord(\''+todayStr()+'\','+a.s+')">转正式</button></div>';
+  });
+  h+='</div>';el.innerHTML=h;el.style.display='block';
+}
 /* ===== 启动 ===== */
-load();seed();
+load();seed();ensureCfg();
 axisStartDay=addD(todayStr(),-BACK);axisDayCount=BACK+FWD+1;
 document.getElementById('wxSw').classList.toggle('on',S.cfg.autoWx!==false);
+document.getElementById('notifySw').classList.toggle('on',S.cfg.notify);
 document.getElementById('todayModal').onclick=function(e){if(e.target===this)closeToday()};
-renderRec();centerNow();renderToday();renderIdeas();renderCatMgr();storeInfo();refreshCloudStat();setSV('day');
-setInterval(function(){if(curDate===todayStr()){renderTimeline(false);renderQbar();renderToday();}},60000);
+renderRec();centerNow();renderToday();renderIdeas();renderCatMgr();storeInfo();refreshCloudStat();renderRoutine();renderGoalList();renderGoals();checkReminders();setSV('day');
+setInterval(function(){if(curDate===todayStr()){renderTimeline(false);renderQbar();renderToday();checkReminders();}},60000);
 </script>
 </body>
 </html>
