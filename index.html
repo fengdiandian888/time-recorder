@@ -7,8 +7,8 @@
 <title>24小时时间记录台</title>
 <style>
 *{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
-:root{--bg:#F5F4F0;--card:#fff;--line:#E6E4DC;--line2:#D3D1C7;--tx:#2C2C2A;--tx2:#5F5E5A;--tx3:#8B8A83;
---acc:#534AB7;--acc-l:#EEEDFE;--red:#D0342C;--red-l:#FCEBEB;--r:12px}
+:root{--bg:#F6F8FA;--card:#FFFFFF;--line:#E3E8EE;--line2:#C9D3DF;--tx:#0A2540;--tx2:#425466;--tx3:#5F6B80;
+--acc:#635BFF;--acc-h:#5851DF;--acc-l:#EDEBFF;--red:#C0392B;--red-l:#FCEDEF;--r:10px;--emp:#FFFFFF;--empn:#EDF1F6}
 html{height:100%}
 body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"PingFang SC","Microsoft YaHei",sans-serif;
 background:var(--bg);color:var(--tx);font-size:14px;line-height:1.55;-webkit-font-smoothing:antialiased;
@@ -18,23 +18,22 @@ h1{font-size:17px;font-weight:600}h2{font-size:15px;font-weight:600}h3{font-size
 button{font-family:inherit;font-size:14px;cursor:pointer;border:none;background:none;color:inherit}
 input,select,textarea{font-family:inherit;font-size:16px;color:var(--tx)}
 .card{background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:14px;margin-bottom:12px}
-.row{display:flex;align-items:center;gap:8px}.wf{display:flex;flex-wrap:wrap;gap:8px}.sp{flex:1}.in{border:1px solid #E6E4DB;background:#fff;border-radius:8px;padding:8px 10px;font-size:13px;color:#454545;outline:none;width:100%;box-sizing:border-box}.in:focus{border-color:var(--acc)}
+.row{display:flex;align-items:center;gap:8px}.wf{display:flex;flex-wrap:wrap;gap:8px}.sp{flex:1}.in{border:1px solid var(--line2);background:#fff;border-radius:8px;padding:8px 10px;font-size:13px;color:var(--tx2);outline:none;width:100%;box-sizing:border-box}.in:focus{border-color:var(--acc)}
 .mut{color:var(--tx2)}.mut3{color:var(--tx3);font-size:12px}
 .btn{min-height:38px;padding:0 14px;border-radius:9px;border:1px solid var(--line2);background:#fff;
 display:inline-flex;align-items:center;justify-content:center;gap:6px;font-size:13px;font-weight:500}
-.btn:active{background:#F0EFEA}
+.btn:active{background:var(--empn)}
 .btn.pri{background:var(--acc);border-color:var(--acc);color:#fff}
-.btn.dan{border-color:#E9BDBA;color:var(--red)}
+.btn.dan{border-color:#FBC6CE;color:var(--red)}
 .btn.sm{min-height:32px;padding:0 10px;font-size:12px}
 .btn svg{width:15px;height:15px;flex:none}
 .btn:disabled{opacity:.4}
 header{display:flex;align-items:center;gap:10px;margin-bottom:12px;flex-wrap:wrap}
 .logo{width:30px;height:30px;border-radius:8px;background:var(--acc);display:flex;align-items:center;justify-content:center;flex:none}
 .logo svg{width:17px;height:17px;color:#fff}
-.today{border-left:3px solid var(--acc)}
 .tdlist{display:flex;flex-direction:column;gap:8px;margin-top:10px}
-.tditem{display:flex;align-items:center;gap:10px;padding:9px 11px;background:#FAF9F6;border:1px solid var(--line);border-radius:9px;flex-wrap:wrap}
-.tditem.urg{background:var(--red-l);border-color:#F1C9C6}.tditem.urg .tdtx{color:#9B2B24}
+.tditem{display:flex;align-items:center;gap:10px;padding:9px 11px;background:var(--emp);border:1px solid var(--line);border-radius:9px;flex-wrap:wrap}
+.tditem.urg{background:var(--red-l);border-color:#FBC6CE}.tditem.urg .tdtx{color:var(--red)}
 .tdtx{flex:1;min-width:140px;font-size:13px}
 .dot{width:7px;height:7px;border-radius:50%;background:var(--acc);flex:none}.dot.r{background:var(--red)}
 .empty{padding:16px;text-align:center;color:var(--tx3);font-size:13px}
@@ -42,9 +41,9 @@ header{display:flex;align-items:center;gap:10px;margin-bottom:12px;flex-wrap:wra
 .dnav{width:38px;height:38px;border-radius:9px;border:1px solid var(--line2);background:#fff;display:flex;align-items:center;justify-content:center}
 .dnav:disabled{opacity:.35}.dnav svg{width:16px;height:16px}
 .dtitle{font-size:15px;font-weight:600;min-width:116px;text-align:center}
-.tag{font-size:11px;padding:2px 8px;border-radius:20px;background:var(--acc-l);color:var(--acc);font-weight:500}
-.tag.g{background:#E1F5EE;color:#0F6E56}.tag.r{background:var(--red-l);color:var(--red)}.tag.y{background:#FAEEDA;color:#854F0B}
-.sw2{position:relative;width:44px;height:25px;border-radius:13px;background:#D3D1C7;flex:none;transition:.15s}
+.tag{font-size:11px;padding:2px 8px;border-radius:20px;background:var(--acc-l);color:var(--acc-h);font-weight:500}
+.tag.g{background:#DDFBE4;color:#056B2D}.tag.r{background:var(--red-l);color:var(--red)}.tag.y{background:#FFF8D6;color:#7A5C00}
+.sw2{position:relative;width:44px;height:25px;border-radius:13px;background:var(--line2);flex:none;transition:.15s}
 .sw2 b{position:absolute;top:2.5px;left:2.5px;width:20px;height:20px;border-radius:50%;background:#fff;transition:.15s}
 .sw2.on{background:var(--acc)}.sw2.on b{left:21.5px}
 .fld{display:flex;flex-direction:column;gap:5px;flex:1;min-width:110px}
@@ -52,52 +51,51 @@ header{display:flex;align-items:center;gap:10px;margin-bottom:12px;flex-wrap:wra
 input[type=text],select,textarea{width:100%;min-height:42px;padding:9px 11px;border:1px solid var(--line2);border-radius:9px;background:#fff}
 textarea{min-height:76px;resize:vertical;line-height:1.6}
 input:focus,select:focus,textarea:focus{outline:none;border-color:var(--acc)}
-
 .sumbar{display:flex;flex-wrap:wrap;gap:7px;margin-top:12px}
-.sumit{display:inline-flex;align-items:center;gap:6px;padding:5px 11px;border-radius:9px;background:#FAF9F6;border:1px solid var(--line);font-size:12.5px}
+.sumit{display:inline-flex;align-items:center;gap:6px;padding:5px 11px;border-radius:9px;background:var(--emp);border:1px solid var(--line);font-size:12.5px}
 .sumit i{width:9px;height:9px;border-radius:3px;flex:none}
 .sumit b{font-variant-numeric:tabular-nums;font-weight:600}
 .catpick{display:flex;flex-wrap:wrap;gap:7px}
 .cp{min-height:40px;padding:0 13px;border-radius:20px;border:1.5px solid var(--line2);background:#fff;
 display:inline-flex;align-items:center;gap:7px;font-size:13.5px;font-weight:500}
 .cp i{width:12px;height:12px;border-radius:4px;flex:none}
-.cp.on{border-color:var(--tx);background:#F3F2ED}
+.cp.on{border-color:var(--tx);background:var(--empn)}
 .recent{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}
-.rc{font-size:12px;padding:6px 11px;border-radius:16px;background:#F3F2ED;border:1px solid var(--line);color:var(--tx2)}
-.segbar{display:flex;gap:4px;background:#EDECE6;padding:4px;border-radius:10px}
+.rc{font-size:12px;padding:6px 11px;border-radius:16px;background:var(--empn);border:1px solid var(--line);color:var(--tx2)}
+.segbar{display:flex;gap:4px;background:var(--empn);padding:4px;border-radius:10px}
 .seg{flex:1;min-height:34px;border-radius:7px;font-size:13px;font-weight:500;color:var(--tx2);display:flex;align-items:center;justify-content:center}
 .seg.on{background:#fff;color:var(--tx)}
 .kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(126px,1fr));gap:10px;margin-top:12px}
-.kpi{background:#FAF9F6;border:1px solid var(--line);border-radius:10px;padding:11px}
+.kpi{background:var(--emp);border:1px solid var(--line);border-radius:10px;padding:11px}
 .kpi .v{font-size:20px;font-weight:600;font-variant-numeric:tabular-nums}
 .kpi .l{font-size:12px;color:var(--tx2)}
 .catrow{display:flex;align-items:center;gap:9px;margin-bottom:7px;font-size:13px}
 .catrow .nm{width:34px;flex:none;color:var(--tx2)}
-.catrow .bar{flex:1;height:15px;background:#F0EFEA;border-radius:4px;overflow:hidden}
+.catrow .bar{flex:1;height:15px;background:var(--empn);border-radius:4px;overflow:hidden}
 .catrow .bar i{display:block;height:100%;border-radius:4px}
 .catrow .vl{width:74px;text-align:right;flex:none;font-variant-numeric:tabular-nums;color:var(--tx2);font-size:12px}
-.hint{background:#FAEEDA;border:1px solid #F0D9AC;color:#7A4A0A;padding:10px 12px;border-radius:9px;font-size:12.5px;margin-top:10px}
+.hint{background:#FFF8D6;border:1px solid #E8C547;color:#7A5C00;padding:10px 12px;border-radius:9px;font-size:12.5px;margin-top:10px}
 .nlist{display:flex;flex-direction:column;gap:7px;margin-top:10px}
 .wxstat{display:flex;align-items:center;gap:7px;font-size:15px;color:var(--tx);margin-top:8px}
 .wxdistrow{display:flex;flex-wrap:wrap;gap:8px;margin-top:8px}
-.wxdist{display:inline-flex;align-items:center;gap:5px;background:#F4F3EE;border:1px solid var(--line);border-radius:20px;padding:5px 12px;font-size:12.5px;color:var(--tx2)}
+.wxdist{display:inline-flex;align-items:center;gap:5px;background:var(--empn);border:1px solid var(--line);border-radius:20px;padding:5px 12px;font-size:12.5px;color:var(--tx2)}
 .we{font-size:15px;line-height:1;flex:none}
 .moodbar{display:flex;align-items:center;gap:10px;margin-top:10px}
 .moodchip{flex:1;min-height:44px;border:1px solid var(--line2);border-radius:11px;background:#fff;padding:8px 13px;text-align:left;font-size:14px;color:var(--tx);display:flex;align-items:center}
 .moodchip .mf{line-height:1.4;word-break:break-word}
-.grumble{background:var(--red-l);border-color:#F1C9C6;color:var(--red)}
-.grumble:hover{background:#F6D9D6}
+.grumble{background:var(--red-l);border-color:#FBC6CE;color:var(--red)}
+.grumble:hover{background:var(--red-l)}
 .gitem{display:flex;gap:9px;padding:9px 2px;border-bottom:1px solid var(--line)}
 .gitem:last-child{border-bottom:none}
 .gtime{font-size:12px;color:var(--tx2);font-variant-numeric:tabular-nums;flex:none;min-width:42px}
 .gtext{flex:1;font-size:13.5px;line-height:1.55}
 .moodstat{display:flex;align-items:center;gap:7px;font-size:15px;color:var(--tx);margin-top:8px}
-.nitem{display:flex;align-items:center;gap:9px;padding:8px 10px;background:#FAF9F6;border:1px solid var(--line);border-radius:8px;font-size:13px}
+.nitem{display:flex;align-items:center;gap:9px;padding:8px 10px;background:var(--emp);border:1px solid var(--line);border-radius:8px;font-size:13px}
 .ntime{font-size:11px;color:var(--tx3);font-variant-numeric:tabular-nums;flex:none}
 .del{width:26px;height:26px;border-radius:6px;display:flex;align-items:center;justify-content:center;color:var(--tx3);flex:none}
 .del svg{width:13px;height:13px}
-.ideacard{border:1px solid var(--line);border-radius:10px;padding:11px;background:#FAF9F6;margin-bottom:8px}
-.ideacard.old{background:#FDF6E8;border-color:#F0D9AC}
+.ideacard{border:1px solid var(--line);border-radius:10px;padding:11px;background:var(--emp);margin-bottom:8px}
+.ideacard.old{background:#FFF8D6;border-color:#E8C547}
 .grp{margin-bottom:16px}
 .grph{display:flex;align-items:center;gap:8px;margin-bottom:8px;flex-wrap:wrap}
 .chip{font-size:12px;padding:5px 11px;border-radius:16px;background:#fff;border:1px solid var(--line2);color:var(--tx2)}
@@ -113,7 +111,7 @@ display:flex;padding:6px 6px calc(6px + env(safe-area-inset-bottom));margin:auto
 .modal{background:#fff;border-radius:14px;padding:18px;max-width:400px;width:100%;margin:auto}
 .modal p{font-size:13.5px;color:var(--tx2);margin:9px 0 16px}
 .mask.mid{align-items:center;padding:18px}
-.toast{position:fixed;left:50%;transform:translateX(-50%);bottom:96px;background:#2C2C2A;color:#fff;
+.toast{position:fixed;left:50%;transform:translateX(-50%);bottom:96px;background:var(--tx);color:#fff;
 padding:10px 18px;border-radius:22px;font-size:13px;z-index:99;opacity:0;transition:.2s;pointer-events:none}
 .toast.on{opacity:1}
 @media(max-width:768px){
@@ -123,13 +121,12 @@ padding:10px 18px;border-radius:22px;font-size:13px;z-index:99;opacity:0;transit
 nav{margin-left:-12px;margin-right:-12px}
 .recbar{margin-left:-12px;margin-right:-12px;flex-wrap:wrap;gap:10px;align-items:flex-start}
 .hd-right{margin-left:auto}
-.daygrid{grid-template-columns:repeat(6,1fr);gap:6px 5px}
 }
 .recHead{display:flex;align-items:flex-end;justify-content:space-between;gap:12px}
 .hd-left{min-width:0}
-.hd-big{font-size:22px;font-weight:700;color:#222;line-height:1.12;letter-spacing:.3px}
-.hd-sub{font-size:12.5px;color:#8a8a82;margin-top:4px;display:flex;align-items:center;gap:8px}
-.wxlabel{color:#9a9a92}
+.hd-big{font-size:22px;font-weight:700;color:var(--tx);line-height:1.12;letter-spacing:.3px}
+.hd-sub{font-size:12.5px;color:var(--tx3);margin-top:4px;display:flex;align-items:center;gap:8px}
+.wxlabel{color:var(--tx3)}
 .hd-week{font-size:13px;font-weight:500;color:var(--tx2);margin-left:8px}
 .wxauto{display:inline-flex;align-items:center;gap:5px;background:#fff;border:1px solid var(--line2);border-radius:20px;padding:5px 12px;font-size:13px;color:var(--tx);min-height:28px}
 .wxauto .wlbl{font-size:12px;color:var(--tx3);margin-right:1px}
@@ -138,21 +135,19 @@ nav{margin-left:-12px;margin-right:-12px}
 .wxauto.load .we{animation:spin .8s linear infinite;display:inline-block}
 @keyframes spin{to{transform:rotate(360deg)}}
 .btn.rec{padding:11px 22px;font-size:15px;font-weight:600;min-height:44px}
-.edtime{font-size:14px;font-weight:600;color:#333;margin-top:6px}
+.edtime{font-size:14px;font-weight:600;color:var(--tx2);margin-top:6px}
 .durpick{display:flex;flex-wrap:wrap;gap:6px;margin-top:6px}
-.dp{border:1px solid #E6E4DB;background:#fff;border-radius:9px;padding:7px 13px;font-size:13px;color:#454545;cursor:pointer}
+.dp{border:1px solid var(--line2);background:#fff;border-radius:9px;padding:7px 13px;font-size:13px;color:var(--tx2);cursor:pointer}
 .dp.on{background:var(--acc);color:#fff;border-color:transparent}
-/* ==== 记录页新布局 ==== */
 .recbar{display:flex;align-items:flex-end;justify-content:space-between;gap:12px;position:sticky;top:0;z-index:30;background:var(--bg);margin:0 -14px;padding:10px 14px 12px}
 .hd-right{display:flex;align-items:center;gap:10px}
-.tdbadge{display:flex;flex-direction:column;align-items:center;justify-content:center;min-width:46px;height:46px;border-radius:12px;background:#FAF9F6;border:1px solid var(--line2);padding:2px 7px;cursor:pointer;flex:none}
+.tdbadge{display:flex;flex-direction:column;align-items:center;justify-content:center;min-width:46px;height:46px;border-radius:12px;background:var(--emp);border:1px solid var(--line2);padding:2px 7px;cursor:pointer;flex:none}
 .tdbadge .tdn{font-size:17px;font-weight:700;line-height:1.05;color:var(--tx)}
 .tdbadge .tdl{font-size:10px;color:var(--tx3);margin-top:1px}
-.tdbadge.urg{background:var(--red-l);border-color:#F1C9C6}
+.tdbadge.urg{background:var(--red-l);border-color:#FBC6CE}
 .tdbadge.urg .tdn{color:var(--red)}
 .rectools{display:flex;align-items:center;gap:6px;flex-wrap:wrap;margin-top:10px}
 .sumsticky{position:sticky;bottom:calc(58px + env(safe-area-inset-bottom));z-index:22;margin-top:12px}
-/* 快捷「接着记」条 */
 .qbar{margin-top:10px;background:#fff;border:1px solid var(--line);border-radius:12px;padding:10px 11px}
 .qhint{font-size:12.5px;color:var(--tx2);margin-bottom:9px;line-height:1.5}
 .qhint b{color:var(--acc);font-variant-numeric:tabular-nums}
@@ -161,47 +156,37 @@ nav{margin-left:-12px;margin-right:-12px}
 .qc{flex:none;min-height:40px;padding:0 14px;border-radius:20px;border:1.5px solid var(--line2);background:#fff;
 display:inline-flex;align-items:center;gap:7px;font-size:13.5px;font-weight:500;white-space:nowrap}
 .qc i{width:11px;height:11px;border-radius:4px;flex:none}
-.qc:active{background:#F3F2ED}
+.qc:active{background:var(--empn)}
 .qc.wr{color:var(--acc);border-color:var(--acc)}
-/* 时间轴：3 行 × 8 小时网格，每小时一张圆角 card，内部分割为上下半小时 */
+/* ===== 胶囊时间轴（整点小时块，无刻度线，同块多段渐变）===== */
 .daygrid{margin-top:10px;max-width:880px;margin-left:auto;margin-right:auto;display:grid;grid-template-columns:repeat(9,1fr);gap:7px 6px}
-.hblock{position:relative;display:flex;flex-direction:column;background:#fff;border:1px solid var(--line);border-radius:12px;overflow:hidden;min-height:102px}
-.hblock.daystart:before{content:'';position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--acc);z-index:2}
-.hhour{position:relative;font-size:13px;color:#1a1a1a;font-weight:500;text-align:center;padding:6px 0 5px;border-bottom:1px solid var(--line2);background:#fff}
-.hhour .hday{font-size:10px;color:var(--acc);font-weight:700;margin-left:3px}
-.hbody{flex:1;display:flex;flex-direction:column;min-height:0}
-.hslot{flex:1;position:relative;cursor:pointer;background:#F0EFEA}
-.hslot+.hslot{border-top:1px solid #fff}
-.hslot .hfill{position:absolute;top:0;right:0;bottom:0;left:0}
-.hslot.lk .hfill{background:repeating-linear-gradient(45deg,#FBFBF8,#FBFBF8 4px,#F1F0EB 4px,#F1F0EB 8px)}
-.hslot.lk{cursor:not-allowed}
-.hslot:active .hfill{opacity:.6}
-.hslot.now .hfill{background:var(--red-l)}
-.hslot.plan .hfill{box-sizing:border-box}
-.hslot.plan.arrived .hfill{animation:planpulse 1.5s ease-in-out infinite}
-@keyframes planpulse{0%,100%{opacity:1}50%{opacity:.5}}
-.planitem{display:flex;align-items:center;gap:8px;padding:9px 4px;border-bottom:1px solid #F0EFEA;font-size:13px;cursor:pointer}
-.planitem:last-child{border-bottom:none}
-.planitem .pstripe{width:4px;height:18px;border-radius:2px;flex:none}
-.planitem .ptm{font-variant-numeric:tabular-nums;color:#454545;font-weight:600;min-width:42px}
-.planitem .pcat{font-weight:600}
-.planitem .pnote{color:#9a9a92;flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
-.planitem.arrived{background:#FBF7EF}
-.planitem .pbadge{font-size:11px;color:#B8860B;background:#FFF3D6;padding:1px 7px;border-radius:9px;flex:none}
-.hslot.now:after{content:'现';position:absolute;top:1px;right:2px;font-size:8.5px;color:#fff;background:var(--red);
-padding:0 3px;border-radius:4px;z-index:2;line-height:1.5;pointer-events:none}
+.hblock{position:relative;display:flex;flex-direction:column;background:var(--card);border:1px solid var(--line);border-radius:14px;overflow:hidden;min-height:60px;cursor:pointer;transition:box-shadow .15s}
+.hblock.night{background:var(--empn)}
+.hblock.nowcap{box-shadow:0 0 0 2.5px var(--red)}
+.hblock:active{transform:scale(.985)}
+.hfill{position:absolute;left:0;top:0;right:0;bottom:0;z-index:0}
+.hhour{position:relative;z-index:3;font-size:12.5px;color:var(--tx);font-weight:700;text-align:center;padding:5px 0 4px}
+.hblock.filled .hhour{color:#fff;font-weight:700;text-shadow:0 1px 2px rgba(0,0,0,.35);padding:2px 0;margin:3px auto 0}
+.hblock.night .hhour{color:var(--tx2)}
+.hblock.night.filled .hhour{color:#fff;text-shadow:0 1px 2px rgba(0,0,0,.35)}
+.hday{font-size:9.5px;color:var(--acc);font-weight:700;margin-left:3px}
+.hnow{position:absolute;top:0;bottom:0;width:2px;background:var(--red);z-index:3;box-shadow:0 0 5px rgba(208,52,44,.7)}
+.hnow:after{content:'现';position:absolute;top:1px;left:2px;font-size:8px;color:#fff;background:var(--red);padding:0 3px;border-radius:4px}
+.hplan{position:absolute;top:3px;bottom:3px;z-index:2;border:1.5px dashed;border-radius:7px;box-sizing:border-box;
+background:repeating-linear-gradient(45deg,rgba(120,120,120,.10),rgba(120,120,120,.10) 4px,transparent 4px,transparent 8px)}
+.hplan .ph{position:absolute;left:4px;top:14px;font-size:9px;font-weight:600;white-space:nowrap;text-shadow:0 1px 2px rgba(0,0,0,.35)}
 .tlhead{display:flex;align-items:center;gap:8px;margin-top:12px;font-size:12px;color:var(--tx3);flex-wrap:wrap}
 .tlhead .tlinfo{font-weight:600;color:var(--tx2)}
-.tlhead .tlpill{background:var(--acc-l);color:var(--acc);padding:3px 12px;border-radius:12px;font-weight:600;font-variant-numeric:tabular-nums}
+.tlhead .tlpill{background:var(--acc-l);color:var(--acc-h);padding:3px 12px;border-radius:12px;font-weight:600;font-variant-numeric:tabular-nums}
 .daycard{margin-top:12px}
 .daycard .dtitle2{font-size:14px;font-weight:600}
 .daytabs{display:flex;gap:6px;margin-top:14px}
 .dtab{flex:1;padding:8px 0;border:1px solid var(--line2);background:#fff;border-radius:9px;font-size:13px;font-weight:500;color:var(--tx2);cursor:pointer}
 .dtab.on{background:var(--acc);border-color:var(--acc);color:#fff}
-.dlgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(118px,1fr));gap:6px;margin-top:10px}
-.dlcard{position:relative;display:flex;flex-direction:column;gap:3px;padding:7px 10px 7px 12px;background:#FAF9F6;border:1px solid var(--line);border-radius:9px;cursor:pointer;overflow:hidden;min-width:0}
-.dlcard:active{background:#F0EFEA}
-.dlcard.life{background:#F6F5F2}
+.dlgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:6px;margin-top:10px}
+.dlcard{position:relative;display:flex;flex-direction:column;gap:3px;padding:7px 10px 7px 12px;background:var(--emp);border:1px solid var(--line);border-radius:9px;cursor:pointer;overflow:hidden;min-width:0}
+.dlcard:active{background:var(--empn)}
+.dlcard.life{background:var(--emp)}
 .dlcard .stripe{position:absolute;left:0;top:0;bottom:0;width:3px}
 .dlcard .top{display:flex;align-items:center;gap:5px;flex-wrap:wrap}
 .dlcard .dt{font-size:11px;color:var(--tx3);font-variant-numeric:tabular-nums;font-weight:600}
@@ -209,17 +194,26 @@ padding:0 3px;border-radius:4px;z-index:2;line-height:1.5;pointer-events:none}
 .dlcard .dx{font-size:12px;color:var(--tx);line-height:1.3;overflow:hidden;
   display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;word-break:break-word}
 .dnote{margin-top:11px;border-top:1px dashed var(--line2);padding-top:11px}
-/* 编辑面板的时间步进器 */
+/* 编辑器：HH:MM 手动输入 + 本小时多段列表 */
 .tmrow{display:flex;align-items:center;gap:8px;margin-top:6px;flex-wrap:wrap}
 .tmbox{display:flex;align-items:center;border:1px solid var(--line2);border-radius:10px;overflow:hidden;background:#fff}
+.tmin{width:46px;min-height:42px;border:none;text-align:center;font-size:18px;font-weight:600;font-variant-numeric:tabular-nums;color:var(--tx);background:#fff;outline:none}
+.tmin:focus{border-color:var(--acc)}
+.tmsep{font-size:18px;font-weight:600;color:var(--tx2);padding:0 1px}
 .tmb{width:38px;height:42px;font-size:20px;color:var(--acc);display:flex;align-items:center;justify-content:center}
-.tmb:active{background:#F0EFEA}
+.tmb:active{background:var(--empn)}
 .tmv{min-width:82px;text-align:center;font-size:15px;font-weight:600;font-variant-numeric:tabular-nums;padding:0 4px}
 .tmto{color:var(--tx2);font-size:13px}
-@media(max-width:768px){
- .recbar{padding:8px 12px 10px}
- .hd-big{font-size:20px}
-}
+.segedit{margin-top:10px;border:1px solid var(--line);border-radius:10px;overflow:hidden}
+.segrow{display:flex;align-items:center;gap:8px;padding:8px 10px;border-bottom:1px solid var(--line);font-size:13px}
+.segrow:last-child{border-bottom:none}
+.segrow .sstripe{width:4px;height:20px;border-radius:2px;flex:none}
+.segrow .srange{font-variant-numeric:tabular-nums;font-weight:600;color:var(--tx2);min-width:96px}
+.segrow .scat{font-weight:600}
+.segrow .snote{color:var(--tx3);flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.segrow .sbtn{font-size:12px;color:var(--acc);padding:4px 8px;border-radius:7px}
+.segrow .sbtn:active{background:var(--empn)}
+.segrow .sbtn.del{color:var(--red)}
 .rtrow{display:flex;align-items:center;gap:6px;margin-bottom:7px;flex-wrap:wrap}
 .rtrow select{min-height:38px;padding:6px 8px;border:1px solid var(--line2);border-radius:8px;background:#fff;font-size:13px}
 .rtrow input[type=text]{flex:1;min-width:90px;min-height:38px}
@@ -227,19 +221,22 @@ padding:0 3px;border-radius:4px;z-index:2;line-height:1.5;pointer-events:none}
 .goalrow{display:flex;align-items:center;gap:9px;margin-bottom:9px;font-size:13px}
 .goalrow .gnm{width:46px;flex:none;color:var(--tx2);display:flex;align-items:center;gap:5px}
 .goalrow .gnm i{width:10px;height:10px;border-radius:3px;flex:none}
-.goalrow .gbar{flex:1;height:16px;background:#F0EFEA;border-radius:4px;overflow:hidden;position:relative}
+.goalrow .gbar{flex:1;height:16px;background:var(--empn);border-radius:4px;overflow:hidden;position:relative}
 .goalrow .gbar i{display:block;height:100%;border-radius:4px;transition:width .3s}
-.goalrow .gv{position:absolute;inset:0;display:flex;align-items:center;justify-content:flex-end;padding-right:6px;font-size:11px;color:#454545;font-variant-numeric:tabular-nums}
-.goalrow .gv.over{color:#0F6E56;font-weight:600}
+.goalrow .gv{position:absolute;inset:0;display:flex;align-items:center;justify-content:flex-end;padding-right:6px;font-size:11px;color:var(--tx2);font-variant-numeric:tabular-nums}
+.goalrow .gv.over{color:var(--tx);font-weight:600}
 .goalrow input.gval{width:56px;min-height:34px;padding:5px 7px;border:1px solid var(--line2);border-radius:8px;text-align:center;font-size:13px}
 /* ===== 作息模板编辑器（时间轴样式）===== */
 .tplchips{display:flex;gap:7px;flex-wrap:wrap}
 .tplchip{padding:7px 13px;border:1px solid var(--line2);background:#fff;border-radius:18px;font-size:13px;font-weight:500;color:var(--tx2);cursor:pointer;display:inline-flex;align-items:center;gap:6px;transition:.12s}
 .tplchip:active{transform:scale(.97)}
 .tplchip.on{background:var(--acc);border-color:var(--acc);color:#fff}
-.tplchip .xd{font-size:11px;opacity:.6;margin-left:2px}
 .tplgrid{display:grid;grid-template-columns:repeat(9,1fr);gap:7px 6px;margin-top:12px;max-width:880px;margin-left:auto;margin-right:auto}
 .tplgrid .hblock{min-height:96px}
+.tplgrid .hbody{flex:1;display:flex;flex-direction:column;min-height:0}
+.tplgrid .hslot{flex:1;position:relative;cursor:pointer;background:var(--empn)}
+.tplgrid .hslot.empty{background:var(--empn)}
+.tplgrid .hslot .hfill{position:absolute;inset:0}
 .tplgrid .hslot .tlab{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:10.5px;font-weight:600;padding:0 3px;text-align:center;line-height:1.15;pointer-events:none;overflow:hidden;white-space:nowrap;text-overflow:ellipsis}
 .tplgrid .hslot.plan .hfill{box-sizing:border-box}
 @media(max-width:768px){
@@ -250,11 +247,11 @@ padding:0 3px;border-radius:4px;z-index:2;line-height:1.5;pointer-events:none}
 .tpllegend{display:flex;gap:10px;flex-wrap:wrap;margin-top:8px;font-size:11.5px;color:var(--tx3)}
 .tpllegend i{width:10px;height:10px;border-radius:3px;display:inline-block;margin-right:4px;vertical-align:-1px}
 .tplbar{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}
-.remind{background:#FFF6E6;border:1px solid #F0D9AC;border-radius:12px;padding:11px 12px}
-.remind .rtitle{display:flex;align-items:center;gap:7px;font-size:13.5px;font-weight:600;color:#854F0B}
-.ritem{display:flex;align-items:center;gap:8px;margin-top:8px;padding:8px 10px;background:#fff;border:1px solid #F0D9AC;border-radius:9px}
+.remind{background:#FFF8D6;border:1px solid #E8C547;border-radius:12px;padding:11px 12px}
+.remind .rtitle{display:flex;align-items:center;gap:7px;font-size:13.5px;font-weight:600;color:#7A5C00}
+.ritem{display:flex;align-items:center;gap:8px;margin-top:8px;padding:8px 10px;background:#fff;border:1px solid #E8C547;border-radius:9px}
 .ritem .riic{width:4px;height:18px;border-radius:2px;flex:none}
-.ritem .ritm{font-variant-numeric:tabular-nums;font-weight:600;color:#454545}
+.ritem .ritm{font-variant-numeric:tabular-nums;font-weight:600;color:var(--tx2)}
 .ritem .rinm{flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 </style>
 </head>
@@ -301,7 +298,7 @@ padding:0 3px;border-radius:4px;z-index:2;line-height:1.5;pointer-events:none}
   <div class="card daycard" id="planCard" style="display:none;margin-top:12px">
     <div class="row"><span class="dtitle2">📌 预备安排</span><div class="sp"></div><span class="mut3" id="planCount"></span></div>
     <div id="planList" style="margin-top:8px"></div>
-    <div class="mut3" style="margin-top:6px;font-size:12px">点时间轴上还没到的格子，就能提前安排。时间到了会自动标「到点」，点一下转成正式记录。</div>
+    <div class="mut3" style="margin-top:6px;font-size:12px">点时间轴上还没到的胶囊，就能提前安排。时间到了会自动标「到点」，点一下转成正式记录。</div>
   </div>
   <div class="card daycard" id="dayCard">
     <div class="row"><span class="dtitle2" id="dayTitle">今天的活动</span><div class="sp"></div><span class="mut3" id="dayEmpty"></span></div>
@@ -382,7 +379,7 @@ padding:0 3px;border-radius:4px;z-index:2;line-height:1.5;pointer-events:none}
   </div>
   <div class="card">
     <h2>作息模板</h2>
-    <p class="mut3" style="margin-top:4px">用时间轴规划作息：从昨晚 21:00 到明早 09:00，和记录页一样的小格子。点任意格子设置分类和内容，可保存多套（如「工作日」「周末」），记录页一键套用。</p>
+    <p class="mut3" style="margin-top:4px">用时间轴规划作息：从昨晚 21:00 到明早 09:00。点任意格子设置分类和内容，可保存多套（如「工作日」「周末」），记录页一键套用。</p>
     <div style="margin-top:10px;display:flex;align-items:center;gap:8px;flex-wrap:wrap">
       <input id="tplName" class="in" style="flex:1;min-width:130px" placeholder="模板名称，如 工作日" oninput="tplRename(this.value)">
       <button class="btn sm" onclick="newTemplate()">+ 新建</button>
@@ -390,7 +387,7 @@ padding:0 3px;border-radius:4px;z-index:2;line-height:1.5;pointer-events:none}
     </div>
     <div id="tplChips" class="tplchips" style="margin-top:10px"></div>
     <div id="tplTimeline" class="tplgrid" style="margin-top:12px"></div>
-    <div class="tpllegend"><span><i style="background:#F0EFEA"></i>空格子（点它填）</span><span style="color:var(--tx3)">点任意格子即可编辑该时段</span></div>
+    <div class="tpllegend"><span><i style="background:var(--empn)"></i>空格子（点它填）</span><span style="color:var(--tx3)">点任意格子即可编辑该时段</span></div>
     <div class="tplbar">
       <button class="btn pri" onclick="applyTemplate(S.cfg.curTpl,todayStr())">套用到今天</button>
       <button class="btn" onclick="resetTplDay()">清空本模板</button>
@@ -420,14 +417,14 @@ padding:0 3px;border-radius:4px;z-index:2;line-height:1.5;pointer-events:none}
     <div class="wf" style="margin-top:9px">
       <button class="btn dan" onclick="clearAll()">清空全部数据</button>
     </div>
-    <div class="cloudbox" style="margin-top:14px;border-top:1px dashed #E2E0D8;padding-top:12px">
+    <div class="cloudbox" style="margin-top:14px;border-top:1px dashed var(--line2);padding-top:12px">
       <div style="display:flex;align-items:center;gap:8px">
         <b style="font-size:13.5px">☁️ 云端同步（GitHub Gist）</b>
         <span id="cloudStat" class="mut3" style="flex:1;text-align:right"></span>
       </div>
       <div style="margin-top:9px;display:flex;flex-direction:column;gap:7px">
         <input id="gistToken" class="in" type="password" placeholder="GitHub 令牌（只开 gist 权限，存本机不泄露）" oninput="S.cfg.gistToken=this.value;save()" style="font-size:12.5px">
-        <div style="font-size:11.5px;color:#9a9a92">Gist ID：<span id="gistIdTxt" class="mut3">未创建</span>（首次同步自动创建）</div>
+        <div style="font-size:11.5px;color:var(--tx3)">Gist ID：<span id="gistIdTxt" class="mut3">未创建</span>（首次同步自动创建）</div>
         <div class="wf">
           <button class="btn pri" onclick="syncToCloud()">☁️ 同步到云端</button>
           <button class="btn" onclick="pullFromCloud()">⬇️ 从云端拉取</button>
@@ -440,12 +437,13 @@ padding:0 3px;border-radius:4px;z-index:2;line-height:1.5;pointer-events:none}
   <div class="card">
     <h2>用法</h2>
     <div class="mut" style="font-size:13px;line-height:1.9;margin-top:6px">
-      1. 时间轴是<b>4 行 × 9 列</b>（昨晚21:00 → 明早08:00，每小时一张圆角卡片），卡片中间的白线把上/下半 hour 分开；红「现」标是此刻<br>
-      2. <b>接着记</b>：每次活动变了，点下方分类（或「记现在」），自动从上一格续到当前——不用再选起点终点<br>
-      3. 睡眠 / 吃饭 / 洗漱选「生活/睡眠」——看得见，但不算进 学习/工作/娱乐/运动/社交 五类占比<br>
-      4. 点时间带里任意格子，可单独改那一段（弹窗里用 +/− 调结束时间）<br>
-      5. 昨天默认能补；手机上：浏览器打开 → 分享 → 添加到主屏幕<br>
-      6. <b>云同步</b>：设置里填一次 GitHub 令牌，点「☁️ 同步到云端」上传；换设备/手机打开后填同一个令牌、点一次同步即可拉取共用
+      1. 时间轴是<b>整点小时胶囊</b>（昨晚21:00 → 明早08:00，每小时一张圆角块），块内按真实占比显示颜色，同一小时填两段会自动做<b>渐变</b>；红框+「现」标是此刻<br>
+      2. <b>点任意胶囊</b>：弹窗里能看本小时已填的段，并手动填开始/结束的「几点几分」（默认整点，分钟你自己改）。分类一键选<br>
+      3. 一个胶囊可填多段（如 14:00–14:20 工作、14:20–14:30 学习），两色自动渐变<br>
+      4. 睡眠 / 吃饭 / 洗漱选「生活/睡眠」——看得见，但不算进 学习/工作/娱乐/运动/社交 五类占比；跨夜睡眠自动拆到第二天<br>
+      5. <b>接着记</b>：点下方分类（或「记现在」），自动从上一活动结束续到当前<br>
+      6. 昨天默认能补；手机上：浏览器打开 → 分享 → 添加到主屏幕<br>
+      7. <b>云同步</b>：设置里填一次 GitHub 令牌，点「☁️ 同步到云端」上传；换设备填同一个令牌、点一次同步即可拉取共用
     </div>
   </div>
 </section>
@@ -467,15 +465,17 @@ padding:0 3px;border-radius:4px;z-index:2;line-height:1.5;pointer-events:none}
     <button class="del" onclick="closeEdit()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg></button></div>
   <div style="margin-top:10px"><label class="mut3">时间</label>
     <div class="edtime" id="edTimeRead"></div></div>
-  <div style="margin-top:12px" id="edStepsWrap"><label class="mut3">时间段</label>
+  <div style="margin-top:12px" id="edStepsWrap"><label class="mut3">本段时间段（自己填几点几分）</label>
     <div class="tmrow">
       <span class="tmto">从</span>
-      <div class="tmbox"><span class="tmv" id="edFrom">00:00</span></div>
+      <div class="tmbox"><input class="tmin" id="edH1" type="number" inputmode="numeric" min="0" max="23" value="0"><span class="tmsep">:</span><input class="tmin" id="edM1" type="number" inputmode="numeric" min="0" max="59" value="0"></div>
+      <button class="tmb" onclick="stepM(-5)">−</button><button class="tmb" onclick="stepM(5)">＋</button>
       <span class="tmto">到</span>
-      <div class="tmbox"><button class="tmb" onclick="stepTo(-1)">−</button><span class="tmv" id="edTo">00:30</span><button class="tmb" onclick="stepTo(1)">+</button></div>
+      <div class="tmbox"><input class="tmin" id="edH2" type="number" inputmode="numeric" min="0" max="23" value="0"><span class="tmsep">:</span><input class="tmin" id="edM2" type="number" inputmode="numeric" min="0" max="59" value="0"></div>
+      <button class="tmb" onclick="stepM2(-5)">−</button><button class="tmb" onclick="stepM2(5)">＋</button>
       <span class="tmto" id="edDurLab"></span>
     </div>
-    <div class="mut3" style="margin-top:4px;font-size:12px">点「+ / −」调整结束时间（最多到当前时刻）</div>
+    <div class="mut3" style="margin-top:4px;font-size:12px">结束小时 < 开始小时，表示跨到第二天（如 23:00 → 07:00 睡觉）</div>
   </div>
   <div id="edPlanHint" class="hint" style="display:none;margin-top:12px">📌 这是还没到的时段，先安排上。等时间到了，再点「转正式记录」。</div>
   <div style="margin-top:12px"><label class="mut3">分类</label>
@@ -483,6 +483,8 @@ padding:0 3px;border-radius:4px;z-index:2;line-height:1.5;pointer-events:none}
   <div class="fld" style="margin-top:12px"><label>具体在做什么</label>
     <input type="text" id="edText" placeholder="">
     <div class="recent" id="edRecent"></div></div>
+  <div style="margin-top:14px"><label class="mut3">本小时已有段落（点「改」编辑，点「删」删除）</label>
+    <div class="segedit" id="edSegList" style="margin-top:6px"></div></div>
   <div class="row" style="margin-top:16px;gap:8px">
     <button class="btn" id="edToRecord" style="display:none" onclick="edToRecord()">转正式记录</button>
     <button class="btn dan" onclick="clearSeg()">清空这段</button><div class="sp"></div>
@@ -546,32 +548,31 @@ padding:0 3px;border-radius:4px;z-index:2;line-height:1.5;pointer-events:none}
 
 <script>
 var LS='wb_t24_';
-var DEFCATS=[{k:'1',n:'学习',c:'#378ADD'},{k:'2',n:'工作',c:'#534AB7'},{k:'3',n:'娱乐',c:'#D4537E'},
-{k:'4',n:'运动',c:'#639922'},{k:'5',n:'社交',c:'#EF9F27'}];
-var LIFE={k:'L',n:'生活/睡眠',c:'#9B9A93'};
-var PAL=['#0F6E56','#993C1D','#185FA5','#854F0B','#72243E','#5F5E5A'];
-var EMPTY='................................................';
+var DEFCATS=[{k:'1',n:'学习',c:'#529DCB'},{k:'2',n:'工作',c:'#D46934'},{k:'3',n:'娱乐',c:'#F3CC4F'},
+{k:'4',n:'运动',c:'#71BF50'},{k:'5',n:'社交',c:'#ECA063'}];
+var LIFE={k:'L',n:'生活/睡眠',c:'#4A6FA5'};
+var PAL=['#529DCB','#D46934','#F3CC4F','#71BF50','#ECA063','#4A6FA5','#B85C1E','#C9A227'];
 var STALE=14;
 var S={days:{},ideas:[],posts:[],cats:null,cfg:{}};
 var CATS=[],CMAP={};
 var curDate=ymd(new Date()), sv='day', svOff=0;
-var edA=0,edToSlot=0,edDay=curDate,edCat='.',edMode='cell';
-var axisStartDay=null,axisDayCount=0,BACK=1,FWD=0,CELL=40,COLW=48,EPOCH='2000-01-01';
-
+var edDay=curDate, edHour=0, edEvId=null, edPlan=false, edIsNew=true;
+var BACK=1,FWD=0;
 function pad(n){return n<10?'0'+n:''+n}
 function ymd(d){return d.getFullYear()+'-'+pad(d.getMonth()+1)+'-'+pad(d.getDate())}
 function pd(s){var a=s.split('-');return new Date(+a[0],+a[1]-1,+a[2])}
 function addD(s,n){var d=pd(s);d.setDate(d.getDate()+n);return ymd(d)}
 function diffD(a,b){return Math.round((pd(a)-pd(b))/86400000)}
-/* 坐标/滚动体系已移除（改用单天 3×8 网格 + ‹ › 切换） */
 function todayStr(){return ymd(new Date())}
-function nowSlot(){var d=new Date();return Math.floor((d.getHours()*60+d.getMinutes())/30)}
-function slotLab(i){return i>=48?'24:00':pad(Math.floor(i/2))+':'+(i%2?'30':'00')}
-function rangeLab(a,b){return slotLab(a)+'-'+slotLab(b+1)}
+function minNow(){var d=new Date();return d.getHours()*60+d.getMinutes()}
+function uid(){return Date.now()+'-'+Math.floor(Math.random()*1e6)}
 function cnDate(s){var d=pd(s);return (d.getMonth()+1)+'月'+d.getDate()+'日 周'+'日一二三四五六'[d.getDay()]}
-function hrs(n){return n%2?(n/2).toFixed(1)+'h':(n/2)+'h'}
+function hrs(m){var h=m/60;return (h%1?h.toFixed(1):h)+'h'}
 function fullDate(s){var d=pd(s);return d.getFullYear()+'年'+(d.getMonth()+1)+'月'+d.getDate()+'日'}
 function wk(s){return '星期'+'日一二三四五六'[pd(s).getDay()]}
+function fmtHM(min){return pad(Math.floor(min/60)%24)+':'+pad(min%60)}
+
+/* ===== 天气 ===== */
 function renderWxAuto(){
   var w=day(curDate).w||'';
   var el=document.getElementById('wxAuto');
@@ -638,7 +639,6 @@ function maybeFetchWeather(){
   S.cfg.lastWxFetch=now;save();
   fetchWeather(true);
 }
-/* ===== 云端同步（GitHub Gist）===== */
 function gistHeaders(){
   return {'Authorization':'token '+(S.cfg.gistToken||''),'Content-Type':'application/json','Accept':'application/vnd.github.v3+json'};
 }
@@ -671,7 +671,7 @@ function pullFromCloud(){
   fetch('https://api.github.com/gists/'+id,{headers:gistHeaders()}).then(function(r){return r.json()}).then(function(d){
     var f=d&&d.files&&d.files['t24.json'];
     if(!f||!f.content){toast('云端暂无数据');return;}
-    try{var obj=JSON.parse(f.content);S=obj;save();renderAll();refreshCloudStat();toast('已从云端拉取');}catch(e){toast('云端数据解析失败');}
+    try{var obj=JSON.parse(f.content);S=obj;loadCats();migrateAll();save();renderAll();refreshCloudStat();toast('已从云端拉取');}catch(e){toast('云端数据解析失败');}
   }).catch(function(){toast('拉取失败（网络或令牌问题）');});
 }
 function quickSync(){
@@ -689,7 +689,7 @@ function ipCoords(cb){
   }).catch(function(){cb('net');});
 }
 function toggleAutoWx(){S.cfg.autoWx=(S.cfg.autoWx===false);document.getElementById('wxSw').classList.toggle('on',S.cfg.autoWx!==false);save();if(S.cfg.autoWx!==false)fetchWeather(true);}
-function esc(s){return String(s).replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]})}
+function esc(s){return String(s==null?'':s).replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]})}
 function wxEmoji(w){
   if(!w)return '';
   if(w.indexOf('雷')>=0)return '⛈️';
@@ -703,10 +703,12 @@ function wxEmoji(w){
 }
 function wxOf(d){return day(d).w||''}
 
+/* ===== 存储 / 数据模型（事件数组 ev）===== */
 function loadCats(){
   CATS=(S.cats&&S.cats.length)?S.cats:DEFCATS.slice();
   CMAP={};CATS.forEach(function(c){CMAP[c.k]=c});CMAP['L']=LIFE;
 }
+function loadCats2(){CMAP={};CATS.forEach(function(c){CMAP[c.k]=c});CMAP['L']=LIFE}
 function load(){
   try{
     S.days=JSON.parse(localStorage.getItem(LS+'days')||'{}');
@@ -716,6 +718,7 @@ function load(){
     S.cfg=JSON.parse(localStorage.getItem(LS+'cfg')||'{}');
   }catch(e){S={days:{},ideas:[],posts:[],cats:null,cfg:{}}}
   loadCats();
+  migrateAll();
 }
 function save(){
   try{
@@ -726,32 +729,51 @@ function save(){
     localStorage.setItem(LS+'cfg',JSON.stringify(S.cfg));
   }catch(e){toast('保存失败，存储可能已满')}
 }
-function day(d){if(!S.days[d])S.days[d]={g:EMPTY,t:{},s:'',w:'',m:'',p:{}};if(!S.days[d].t)S.days[d].t={};if(!S.days[d].gr)S.days[d].gr=[];if(!S.days[d].p)S.days[d].p={};return S.days[d]}
+function day(d){
+  if(!S.days[d])S.days[d]={ev:[]};
+  if(!S.days[d].ev)S.days[d].ev=[];
+  return S.days[d];
+}
 function hexA(hex,a){var h=(hex||'#ccc').replace('#','');if(h.length===3)h=h[0]+h[0]+h[1]+h[1]+h[2]+h[2];var r=parseInt(h.substr(0,2),16),g=parseInt(h.substr(2,2),16),b=parseInt(h.substr(4,2),16);return 'rgba('+r+','+g+','+b+','+a+')';}
 function hasDay(d){return !!S.days[d]}
-function cnt(s,c){var n=0;for(var i=0;i<s.length;i++)if(s[i]===c)n++;return n}
+function migrateDay(dd){
+  if(dd.ev)return;
+  dd.ev=[];
+  if(dd.g){
+    for(var i=0;i<48;i++){ if(dd.g[i]!=='.'){ dd.ev.push({id:uid(),cat:dd.g[i],s:i*30,e:i*30+30,t:(dd.t&&dd.t[i])||'',plan:false}); } }
+  }
+  if(dd.p){ Object.keys(dd.p).forEach(function(k){ var pl=dd.p[k]; if(pl){ dd.ev.push({id:uid(),cat:pl.c,s:(+k)*30,e:(+k)*30+30,t:pl.t||'',plan:true}); } }); }
+  delete dd.g; delete dd.t; delete dd.p; delete dd.mu;
+}
+function migrateAll(){ Object.keys(S.days).forEach(function(d){migrateDay(S.days[d]);}); }
+function catColor(k){var c=CMAP[k];return c?c.c:LIFE.c}
+function catName(k){var c=CMAP[k];return c?c.n:LIFE.n}
 
 function dayEditable(d){
   var f=diffD(todayStr(),d);
   return f>=0 && f<=1;   /* 今天 + 昨天可改；更早只读 */
 }
-function absBeforeNow(d,i){
-  if(d===todayStr())return i<=nowSlot();
-  return diffD(todayStr(),d)>0;
-}
-function editable(d,i){return dayEditable(d)&&absBeforeNow(d,i)}
+function editableEv(d,sMin){ return dayEditable(d) && ((d===todayStr())? sMin<=minNow() : diffD(todayStr(),d)>0); }
 function permLocked(d){return diffD(todayStr(),d)>1}
 
-/* ===== 段合并 ===== */
-function segs(d){
-  var g=d.g,t=d.t||{},out=[],i=0;
-  while(i<48){
-    var k=g[i],tx=t[i]||'',j=i+1;
-    while(j<48&&g[j]===k&&(t[j]||'')===tx)j++;
-    out.push({a:i,b:j-1,k:k,t:tx});i=j;
+/* 事件增删改 */
+function addEvent(d,ev){ var dd=day(d); dd.ev.push(ev); dd.ev.sort(function(a,b){return a.s-b.s}); }
+function delEvent(d,gid){ var dd=day(d); dd.ev=dd.ev.filter(function(x){return x.gid!==gid && x.id!==gid;}); }
+function eventsOf(d){ return day(d).ev.slice().sort(function(a,b){return a.s-b.s}); }
+function recordsOf(d){ return eventsOf(d).filter(function(e){return !e.plan}); }
+function plansOf(d){ return eventsOf(d).filter(function(e){return e.plan}); }
+function filledMinutes(d){ var t=0; recordsOf(d).forEach(function(e){t+=Math.max(0,Math.min(1440,e.e)-Math.max(0,e.s));}); return t; }
+function hourEvents(d,hour){ var s0=hour*60,s1=s0+60; return eventsOf(d).filter(function(e){return Math.max(e.s,s0)<Math.min(e.e,s1);}); }
+function firstFreeStart(d,hour){
+  var s0=hour*60, s1=s0+60; var evs=hourEvents(d,hour).filter(function(e){return !e.plan});
+  for(var m=s0;m<s1;m++){
+    var busy=evs.some(function(e){return m>=e.s&&m<e.e;});
+    if(!busy)return m;
   }
-  return out;
+  return s0;
 }
+
+/* ===== 记录页 ===== */
 function renderRec(){
   if(dayEditable(curDate)) autoSleep(curDate);
   applyDayLight();
@@ -767,104 +789,6 @@ function renderRec(){
   updateApplyLbl();
   checkReminders();
 }
-/* 旧滚动坐标系（AXIS/axisLab/rangeLabel/coord*）已废弃，未再调用 */
-function slotCells(d,a,b){var o=[];for(var i=a;i<=b;i++)o.push({day:d,slot:i});return o;}
-function renderQbar(){
-  var d=curDate, lfe=lastFilledEnd(d), isT=(d===todayStr());
-  var start=lfe+1, end=isT?nowSlot():47;
-  var hint, long=false;
-  if(lfe<0) hint='这一天还没开始记，点一个分类即可从 <b>00:00</b> 接着记到'+(isT?'<b>现在</b>':'<b>24:00</b>');
-  else if(start>end){ hint='已记到'+(isT?'<b>现在</b>':'<b>24:00</b>')+'，可以点格子补细节，或等下一格再记'; long=true; }
-  else hint='上一段止于 <b>'+slotLab(lfe+1)+'</b>，接着记：从 <b>'+slotLab(start)+'</b> 到'+(isT?'<b>现在</b>':'<b>24:00</b>');
-  var chips='';
-  CATS.concat([LIFE]).forEach(function(c){
-    chips+='<button class="qc'+(S.cfg.lastCat===c.k?' wr':'')+'" onclick="quickContinue(\''+c.k+'\')"><i style="background:'+c.c+'"></i>'+esc(c.n)+'</button>';
-  });
-  document.getElementById('qHint').innerHTML=hint;
-  document.getElementById('qHint').classList.toggle('long',long);
-  document.getElementById('qChips').innerHTML=chips;
-  document.getElementById('qbar').style.display='block';
-}
-function txtOn(hex){
-  if(!hex||hex[0]!=='#')return '#1a1a1a';
-  var h=hex.slice(1); if(h.length===3)h=h[0]+h[0]+h[1]+h[1]+h[2]+h[2];
-  var r=parseInt(h.substr(0,2),16),g=parseInt(h.substr(2,2),16),b=parseInt(h.substr(4,2),16);
-  var a=[r,g,b].map(function(v){v/=255;return v<=0.03928?v/12.92:Math.pow((v+0.055)/1.055,2.4)});
-  var L=0.2126*a[0]+0.7152*a[1]+0.0722*a[2];
-  return L>0.5?'#1a1a1a':'#fff';
-}
-function renderTimeline(){
-  var el=document.getElementById('timeline');
-  var t=todayStr();
-  var startD=addD(t,-1), startH=21;   /* 昨晚 21:00 */
-  var endD=addD(t,1), endH=9;         /* 明早 09:00 结束，最后一张显示 08:00 */
-  var totalH=diffD(endD,startD)*24 - startH + endH;   /* 36 小时，9×4 正好排满 */
-  var baseMs=pd(startD).setHours(startH,0,0,0);
-  var ns=nowSlot();
-  var h='';
-  for(var k=0;k<totalH;k++){
-    var dt=new Date(baseMs+k*3600000);
-    var d=ymd(dt), hh=dt.getHours();
-    var isDayStart=(hh===0);
-    var s0=hh*2, s1=hh*2+1;
-    var showDay=isDayStart||(k===0);
-    var dayLabel='';
-    if(showDay){
-      var f=diffD(t,d);
-      if(f===1)dayLabel='昨天';
-      else if(f===0)dayLabel='今天';
-      else if(f===-1)dayLabel='明天';
-      else dayLabel=(dt.getMonth()+1)+'/'+dt.getDate();
-    }
-    h+='<div class="hblock'+(isDayStart?' daystart':'')+'">';
-    h+='<div class="hhour">'+(hh<10?'0'+hh:hh)+':00'+(dayLabel?' <span class="hday">'+dayLabel+'</span>':'')+'</div>';
-    h+='<div class="hbody">';
-    [s0,s1].forEach(function(s){
-      var dd=day(d);
-      var g=dd.g[s];
-      var pl=(dd.p&&dd.p[s])?dd.p[s]:null;
-      var isFuture=!absBeforeNow(d,s);
-      var ed=editable(d,s)||isFuture;
-      var isNow=(d===t&&s===ns);
-      var cat=(g!=='.'&&CMAP[g])?CMAP[g]:null;
-      var planCat=pl?CMAP[pl.c]:null;
-      var fill='', cls='';
-      if(cat){ fill='background:'+cat.c; }
-      else if(pl&&planCat){ fill='background:'+hexA(planCat.c,0.16)+';box-shadow:inset 0 0 0 1.5px '+planCat.c; cls=' plan'+(isFuture?'':' arrived'); }
-      else if(g!=='.'){ fill='background:#D9D8D1'; }
-      h+='<div class="hslot'+(isNow?' now':'')+cls+(ed?'':' lk')+'" data-day="'+d+'" data-slot="'+s+'" onclick="tapCell(\''+d+'\','+s+')"><div class="hfill" style="'+fill+'"></div></div>';
-    });
-    h+='</div></div>';
-  }
-  el.innerHTML=h;
-}
-function centerNow(){ updateTlFocus(); }
-function renderDayList(d){
-  d=d||curDate;
-  var sg=segs(day(d)), h='', empty=0, emptySlots=0;
-  document.getElementById('dayTitle').textContent=(d===todayStr()?'今天':cnDate(d))+' 的活动';
-  sg.forEach(function(s){
-    if(s.k==='.'){empty++;emptySlots+=(s.b-s.a+1);return;}
-    var cat=CMAP[s.k];
-    var col=cat?cat.c:LIFE.c;
-    var stripe=cat?'<span class="stripe" style="background:'+col+'"></span>':'';
-    var catChip=cat?'<span class="dc" style="background:'+cat.c+'1F;color:'+cat.c+'">'+cat.n+'</span>':'';
-    h+='<div class="dlcard'+(s.k==='L'?' life':'')+'" onclick="openEdit(\''+d+'\','+s.a+')">'+stripe+
-       '<div class="top"><span class="dt">'+rangeLab(s.a,s.b)+'</span>'+catChip+'</div>'+
-       '<div class="dx">'+(s.t?esc(s.t):(cat?cat.n:''))+'</div></div>';
-  });
-  if(!h)h='<div class="empty">这一天还没有记录，点上面的时间格或下方分类开始记。</div>';
-  if(empty>0)h+='<div class="mut3" style="margin-top:8px;font-size:12px">还有 '+empty+' 段共 '+hrs(emptySlots)+' 没记（点对应时间格补）</div>';
-  document.getElementById('dayList').innerHTML=h;
-  document.getElementById('dayEmpty').textContent= empty>0 ? ('空 '+hrs(emptySlots)) : '已填满';
-}
-function tapCell(d,slot){
-  var dd=day(d);
-  var pl=(dd.p&&dd.p[slot])?dd.p[slot]:null;
-  if(pl){ openPlan(d,slot); return; }            /* 已有计划 → 编辑/转正式 */
-  if(absBeforeNow(d,slot)){ openEdit(d,slot); return; }  /* 已到/过去 → 记录 */
-  openPlan(d,slot);                              /* 未来 → 预备安排 */
-}
 function applyDayLight(){
   document.getElementById('curDate').textContent=fullDate(curDate);
   document.getElementById('curWeek').textContent=wk(curDate);
@@ -875,95 +799,238 @@ function applyDayLight(){
   else if(diffD(todayStr(),curDate)<0){ln.style.display='block';ln.textContent='这是未来的时间，还没到，暂不能记。';}
   else ln.style.display='none';
 }
-function updateTlFocus(){}
+function evOverlap(d,s0,s1){
+  var out=[];
+  recordsOf(d).forEach(function(ev){
+    var a=Math.max(ev.s,s0), b=Math.min(ev.e,s1);
+    if(b>a){ out.push({p0:(a-s0)/60,p1:(b-s0)/60,color:catColor(ev.cat)}); }
+  });
+  out.sort(function(x,y){return x.p0-y.p0});
+  return out;
+}
+function planOverlap(d,s0,s1){
+  var out=[];
+  plansOf(d).forEach(function(ev){
+    var a=Math.max(ev.s,s0), b=Math.min(ev.e,s1);
+    if(b>a){ out.push({p0:(a-s0)/60,p1:(b-s0)/60,color:catColor(ev.cat),cat:ev.cat,t:ev.t,gid:ev.gid||ev.id}); }
+  });
+  out.sort(function(x,y){return x.p0-y.p0});
+  return out;
+}
+function fillColor(hex){
+  /* 在线性空间按亮度压暗（gamma 校正），使白字对比 ≥4.5:1（目标亮度≈0.178，预留 8bit 量化余量），色相保留、比旧 sRGB 直乘更亮 */
+  var h=hex.slice(1); if(h.length===3)h=h[0]+h[0]+h[1]+h[1]+h[2]+h[2];
+  var r=parseInt(h.substr(0,2),16)/255,g=parseInt(h.substr(2,2),16)/255,b=parseInt(h.substr(4,2),16)/255;
+  function lin(v){return v<=0.03928?v/12.92:Math.pow((v+0.055)/1.055,2.4)}
+  function srgb(v){return v<=0.0031308?12.92*v:1.055*Math.pow(v,1/2.4)-0.055}
+  var rl=lin(r),gl=lin(g),bl=lin(b);
+  var L=0.2126*rl+0.7152*gl+0.0722*bl;
+  var target=0.178;
+  if(L>target){
+    var scale=Math.min(target/L,0.5);
+    rl*=scale; gl*=scale; bl*=scale;
+  }else{
+    return hex;
+  }
+  function p2(v){v=Math.round(srgb(v)*255).toString(16);return v.length<2?'0'+v:v;}
+  return '#'+p2(rl)+p2(gl)+p2(bl);
+}
+function gradientFor(parts,night){
+  var EMP=night?'var(--empn)':'var(--emp)';
+  if(!parts.length)return EMP;
+  var stops=[EMP+' 0%'], prev=null, last=0, T=2.5;
+  parts.forEach(function(p){
+    var col=fillColor(p.color);
+    if(p.p0>last+0.0005){ stops.push(EMP+' '+(p.p0*100).toFixed(2)+'%'); prev=null; }
+    if(prev&&prev!==col){
+      var tb=Math.min(T,(p.p0-last)*50);
+      stops.push(prev+' '+(p.p0*100-tb).toFixed(2)+'%');
+      stops.push(col+' '+(p.p0*100+tb).toFixed(2)+'%');
+    }else{
+      stops.push(col+' '+(p.p0*100).toFixed(2)+'%');
+    }
+    stops.push(col+' '+(p.p1*100).toFixed(2)+'%');
+    last=p.p1; prev=col;
+  });
+  if(last<1) stops.push(EMP+' '+(last*100).toFixed(2)+'%');
+  return 'linear-gradient(90deg,'+stops.join(',')+')';
+}
+function renderTimeline(){
+  var el=document.getElementById('timeline');
+  var t=todayStr();
+  var startD=addD(t,-1), startH=21;
+  var endD=addD(t,1), endH=9;
+  var totalH=diffD(endD,startD)*24 - startH + endH;   /* 36 小时 */
+  var baseMs=pd(startD).setHours(startH,0,0,0);
+  var nm=minNow();
+  var h='';
+  for(var k=0;k<totalH;k++){
+    var dt=new Date(baseMs+k*3600000);
+    var d=ymd(dt), hh=dt.getHours();
+    var night=(hh>=22||hh<=5);
+    var base=hh*60;
+    var parts=evOverlap(d,base,base+60);
+    var grad=gradientFor(parts,night);
+    var isNowCap=(d===t && hh===Math.floor(nm/60));
+    var nowLeft=isNowCap?((nm-base)/60*100):-1;
+    var f=diffD(t,d);
+    var dayLabel=(f===1)?'昨天':(f===0)?'今天':(f===-1)?'明天':((dt.getMonth()+1)+'/'+dt.getDate());
+    var plans=planOverlap(d,base,base+60);
+    var plh='';
+    plans.forEach(function(p){
+      plh+='<div class="hplan" style="left:'+(p.p0*100).toFixed(2)+'%;width:'+((p.p1-p.p0)*100).toFixed(2)+'%;border-color:'+p.color+';background:'+fillColor(p.color)+'">'+
+        '<span class="ph" style="color:#fff">'+esc(p.t||catName(p.cat))+'</span></div>';
+    });
+    h+='<div class="hblock'+(night?' night':'')+(parts.length?' filled':'')+(isNowCap?' nowcap':'')+'" onclick="tapCapsule(\''+d+'\','+hh+')">';
+    h+='<div class="hfill" style="background:'+grad+'"></div>'+plh;
+    h+='<div class="hhour">'+(hh<10?'0'+hh:hh)+':00'+(dayLabel?' <span class="hday">'+dayLabel+'</span>':'')+'</div>';
+    if(nowLeft>=0)h+='<div class="hnow" style="left:'+nowLeft.toFixed(2)+'%"></div>';
+    h+='</div>';
+  }
+  el.innerHTML=h;
+}
+function tapCapsule(d,hour){
+  var evs=hourEvents(d,hour);
+  var hasRec=evs.some(function(e){return !e.plan;});
+  if(permLocked(d)){ toast('这一天已锁定'); return; }
+  if(!hasRec && !evs.length){ openCapsule(d,hour,null); return; }
+  if(evs.length===1 && !evs[0].plan){ editEvent(d,evs[0].gid||evs[0].id); return; }
+  openCapsule(d,hour,null);
+}
+function renderDayList(d){
+  d=d||curDate;
+  var evs=recordsOf(d), h='', emptyMin=1440-filledMinutes(d);
+  document.getElementById('dayTitle').textContent=(d===todayStr()?'今天':cnDate(d))+' 的活动';
+  evs.forEach(function(ev){
+    var cat=CMAP[ev.cat]||LIFE;
+    var col=cat.c;
+    var stripe=cat?'<span class="stripe" style="background:'+col+'"></span>':'';
+    var catChip=cat?'<span class="dc" style="background:'+cat.c+';color:'+txtOn(cat.c)+'">'+cat.n+'</span>':'';
+    h+='<div class="dlcard'+(ev.cat==='L'?' life':'')+'" onclick="editEvent(\''+d+'\',\''+(ev.gid||ev.id)+'\')">'+stripe+
+       '<div class="top"><span class="dt">'+fmtHM(ev.s)+'-'+fmtHM(ev.e)+'</span>'+catChip+'</div>'+
+       '<div class="dx">'+(ev.t?esc(ev.t):(cat?cat.n:''))+'</div></div>';
+  });
+  if(!h)h='<div class="empty">这一天还没有记录，点上面的时间胶囊或下方分类开始记。</div>';
+  if(emptyMin>0)h+='<div class="mut3" style="margin-top:8px;font-size:12px">还有 '+hrs(emptyMin)+' 没记（点对应时间胶囊补）</div>';
+  document.getElementById('dayList').innerHTML=h;
+  document.getElementById('dayEmpty').textContent= emptyMin>0 ? ('空 '+hrs(emptyMin)) : '已填满';
+}
+function renderPlanList(){
+  var d=curDate, evs=plansOf(d), h='';
+  var pc=document.getElementById('planCount'); if(pc)pc.textContent= evs.length? (evs.length+' 项') : '';
+  evs.forEach(function(ev){
+    var cat=CMAP[ev.cat]||LIFE;
+    var stripe='<span class="stripe" style="background:'+cat.c+'"></span>';
+    var catChip='<span class="dc" style="background:'+cat.c+';color:'+txtOn(cat.c)+'">'+cat.n+'</span>';
+    var rng=fmtHM(ev.s)+'-'+fmtHM(ev.e);
+    var note=ev.t?esc(ev.t):'';
+    var editable=editableEv(d,ev.s);
+    var act= editable
+      ? '<button class="btn sm pri" onclick="event.stopPropagation();edToRecordById(\''+d+'\',\''+(ev.gid||ev.id)+'\')">转正式</button>'
+      : '<span class="mut3" style="font-size:12px">未到时间</span>';
+    h+='<div class="dlcard'+(ev.cat==='L'?' life':'')+'" onclick="editEvent(\''+d+'\',\''+(ev.gid||ev.id)+'\')">'+stripe+
+       '<div class="top"><span class="dt">'+rng+'</span>'+catChip+'</div>'+
+       '<div class="dx">'+(note||cat.n)+'</div>'+
+       '<div style="margin-top:6px">'+act+'</div></div>';
+  });
+  if(!h)h='<div class="empty mut3" style="font-size:12px">还没有预备安排。点时间胶囊选「计划」模式，或套用作息模板即可生成。</div>';
+  document.getElementById('planList').innerHTML=h;
+}
 function renderSum(){
-  var d=day(curDate),c={},tot=0,life=0;
-  CATS.forEach(function(x){c[x.k]=0});
-  for(var i=0;i<48;i++){var ch=d.g[i];if(ch==='L'){life++;}else if(ch!=='.'&&c[ch]!==undefined){c[ch]++;tot++}}
+  var c={},tot=0,life=0; CATS.forEach(function(x){c[x.k]=0});
+  recordsOf(curDate).forEach(function(ev){
+    if(ev.cat==='L'){life+=ev.e-ev.s;}
+    else if(c[ev.cat]!==undefined){c[ev.cat]+=ev.e-ev.s;tot+=ev.e-ev.s;}
+  });
   var h='';
   CATS.forEach(function(x){h+='<span class="sumit"><i style="background:'+x.c+'"></i>'+x.n+' <b>'+hrs(c[x.k])+'</b></span>'});
   if(life>0)h+='<span class="sumit"><i style="background:'+LIFE.c+'"></i>'+LIFE.n+' <b>'+hrs(life)+'</b></span>';
-  h+='<span class="sumit"><i style="background:#DDDCD5"></i>未记录 <b>'+hrs(48-tot-life)+'</b></span>';
+  h+='<span class="sumit"><i style="background:var(--line2)"></i>未记录 <b>'+hrs(1440-tot-life)+'</b></span>';
   document.getElementById('sumbar').innerHTML=h;
 }
-function shiftDay(n){var nd=addD(curDate,n);var lo=addD(todayStr(),-BACK),hi=addD(todayStr(),FWD);if(nd<lo||nd>hi)return;curDate=nd;renderRec();centerNow()}
-function updateDayTabs(){var off=diffD(todayStr(),curDate);document.querySelectorAll('#dayTabs .dtab').forEach(function(b){b.classList.toggle('on',+b.dataset.d===off)});}
+function renderQbar(){
+  var d=curDate, last=lastEventEnd(d), isT=(d===todayStr());
+  var start=last, end=isT?minNow():1440;
+  var hint, long=false;
+  if(last<=0) hint='这一天还没开始记，点一个分类即可从 <b>00:00</b> 接着记到'+(isT?'<b>现在</b>':'<b>24:00</b>');
+  else if(start>=end){ hint='已记到'+(isT?'<b>现在</b>':'<b>24:00</b>')+'，可以点胶囊补细节，或等下一格再记'; long=true; }
+  else hint='上一段止于 <b>'+fmtHM(last)+'</b>，接着记：从 <b>'+fmtHM(start)+'</b> 到'+(isT?'<b>现在</b>':'<b>24:00</b>');
+  var chips='';
+  CATS.concat([LIFE]).forEach(function(c){
+    chips+='<button class="qc'+(S.cfg.lastCat===c.k?' wr':'')+'" onclick="quickContinue(\''+c.k+'\')"><i style="background:'+c.c+'"></i>'+esc(c.n)+'</button>';
+  });
+  document.getElementById('qHint').innerHTML=hint;
+  document.getElementById('qHint').classList.toggle('long',long);
+  document.getElementById('qChips').innerHTML=chips;
+  document.getElementById('qbar').style.display='block';
+}
+function txtOn(hex){
+  if(!hex||hex[0]!=='#')return '#15181D';
+  var h=hex.slice(1); if(h.length===3)h=h[0]+h[0]+h[1]+h[1]+h[2]+h[2];
+  var r=parseInt(h.substr(0,2),16),g=parseInt(h.substr(2,2),16),b=parseInt(h.substr(4,2),16);
+  var a=[r,g,b].map(function(v){v/=255;return v<=0.03928?v/12.92:Math.pow((v+0.055)/1.055,2.4)});
+  var L=0.2126*a[0]+0.7152*a[1]+0.0722*a[2];
+  return L>0.22?'#1A1A1A':'#fff';
+}
+function lastEventEnd(d){ var m=0; recordsOf(d).forEach(function(e){ if(e.e>m)m=e.e; }); return m; }
 function setViewDay(off){curDate=addD(todayStr(),off);renderRec();}
+function updateDayTabs(){var off=diffD(todayStr(),curDate);document.querySelectorAll('#dayTabs .dtab').forEach(function(b){b.classList.toggle('on',+b.dataset.d===off)});}
 function goToday(){curDate=todayStr();renderRec();updateDayTabs();}
-function recNow(){goToday(); if(S.cfg.lastCat) quickContinue(S.cfg.lastCat); else openContinue();}
+function recNow(){goToday(); if(S.cfg.lastCat) quickContinue(S.cfg.lastCat); else openCapsule(curDate,Math.floor(minNow()/60),null);}
+function openToday(){document.getElementById('todayModal').classList.add('on')}
+function closeToday(){document.getElementById('todayModal').classList.remove('on')}
 
-/* ===== 编辑面板（接着记） ===== */
-function lastFilledEnd(d){var g=day(d).g;for(var i=47;i>=0;i--)if(g[i]!=='.')return i;return -1}
-function openContinue(){
-  if(!dayEditable(curDate)){toast('该日期已锁定');return;}
-  var d=curDate, dd=day(d), lfe=lastFilledEnd(d);
-  edDay=d; edMode='cont';
-  edA=(lfe<0)?0:lfe+1; if(edA>47)edA=47;
-  edToSlot=(d===todayStr())?nowSlot():47; if(edToSlot<edA)edToSlot=edA;
-  edCat=(lfe>=0&&dd.g[lfe]!=='.')?dd.g[lfe]:(S.cfg.lastCat||CATS[0].k);
-  document.getElementById('edText').value=(lfe>=0)?(dd.t[lfe]||''):'';
-  renderEdCats();renderRecent();renderEdSteps();updateEdTitle();
+/* ===== 编辑器（手填分钟 + 同块多段）===== */
+function openCapsule(d,hour,evId){
+  edDay=d; edHour=hour; edEvId=(evId||null); edIsNew=true;
+  var base=hour*60;
+  var st = (evId)? null : firstFreeStart(d,hour);
+  if(evId){ var ev=eventsOf(d).filter(function(e){return (e.gid||e.id)===evId;})[0]; if(ev){st=ev.s;} }
+  var sMin = (st!=null)? st : base;
+  var eMin = Math.min(sMin+60, base+60);
+  if(evId){ var ev2=eventsOf(d).filter(function(e){return (e.gid||e.id)===evId;})[0]; if(ev2){sMin=ev2.s;eMin=ev2.e%1440; if(eMin<=sMin)eMin=sMin+30;} edPlan=!!ev2.plan; edIsNew=false; }
+  else { edPlan=false; edIsNew=true; }
+  edCat = (evId)? (eventsOf(d).filter(function(e){return (e.gid||e.id)===evId;})[0]||{}).cat||'.' : (S.cfg.lastCat||'.');
+  setEdTime(sMin,eMin);
+  document.getElementById('edText').value = evId? ((eventsOf(d).filter(function(e){return (e.gid||e.id)===evId;})[0]||{}).t||'') : '';
+  document.getElementById('edPlanHint').style.display = edPlan? 'block':'none';
+  document.getElementById('edToRecord').style.display = (edPlan && !editableEv(d,sMin))? 'none' : (edPlan? 'inline-flex':'none');
+  document.getElementById('edTitle').textContent = edPlan? '预备安排（计划）' : (evId? '编辑这段':'记录 / 新增一段');
+  renderEdCats(); renderRecent(); renderSegList();
   document.getElementById('editMask').classList.add('on');
 }
-function openEdit(d,slot){
-  if(!editable(d,slot)){toast('这段还不到时间，或已锁定');return;}
-  var dd=day(d);
-  edDay=d; edMode='cell'; edA=slot; edToSlot=slot;
-  edCat=(dd.g[slot]!=='.')?dd.g[slot]:(S.cfg.lastCat||'.');
-  document.getElementById('edText').value=dd.t[slot]||'';
-  document.getElementById('edStepsWrap').style.display='';
-  document.getElementById('edPlanHint').style.display='none';
-  document.getElementById('edToRecord').style.display='none';
-  renderEdCats();renderRecent();renderEdSteps();updateEdTitle();
-  document.getElementById('editMask').classList.add('on');
+function editEvent(d,id){ openCapsule(d,Math.floor((eventsOf(d).filter(function(e){return (e.gid||e.id)===id;})[0]||{s:0}).s/60),id); }
+function setEdTime(sMin,eMin){
+  edH1.value=Math.floor(sMin/60)%24; edM1.value=Math.floor(sMin%60);
+  edH2.value=Math.floor(eMin/60)%24; edM2.value=Math.floor(eMin%60);
+  updateEdDur();
 }
-function openPlan(d,slot){
-  var dd=day(d), pl=(dd.p&&dd.p[slot])||null;
-  edDay=d; edMode='plan'; edA=slot; edToSlot=slot;
-  edCat= pl? (pl.c||'.') : (S.cfg.lastCat||'.');
-  document.getElementById('edText').value= pl? (pl.t||'') : '';
-  document.getElementById('edStepsWrap').style.display='none';
-  document.getElementById('edPlanHint').style.display='block';
-  var arrived=absBeforeNow(d,slot);
-  document.getElementById('edToRecord').style.display=(arrived?'inline-flex':'none');
-  renderEdCats();renderRecent();updateEdTitle();
-  document.getElementById('editMask').classList.add('on');
+function getEdTime(){
+  var h1=clampInt(edH1.value,0,23,0), m1=clampInt(edM1.value,0,59,0);
+  var h2=clampInt(edH2.value,0,23,0), m2=clampInt(edM2.value,0,59,0);
+  var s=h1*60+m1, e=h2*60+m2;
+  if(e<=s) e=s+ (edEvId? 0 : 30);   /* 结束必须>开始；跨夜由 h2<h1 表达 */
+  if(h2<h1) e = h2*60+m2+1440;     /* 跨到第二天 */
+  if(e>s && h2>=h1 && e>1440) e=1440;
+  return {s:s,e:e};
 }
-function quickContinue(k){
-  if(!dayEditable(curDate)){toast(permLocked(curDate)?'该日期已锁定，无法补记':'想补这一天不可用');return;}
-  var d=curDate, dd=day(d), lfe=lastFilledEnd(d);
-  var start=lfe+1; if(start>47)start=47; if(start<0)start=0;
-  var end=(d===todayStr())?nowSlot():47;
-  if(start>end){toast('已记到当前时间，等下一格再记');return;}
-  var prevTx=(lfe>=0)?(dd.t[lfe]||''):'';
-  for(var i=start;i<=end;i++){
-    var g=dd.g.split(''); g[i]=k; dd.g=g.join('');
-    if(prevTx)dd.t[i]=prevTx; else delete dd.t[i];
-    if(diffD(todayStr(),d)>0)dd.mu=true;
-  }
-  if(k!=='.')S.cfg.lastCat=k;
-  save();renderRec();renderToday();renderStat();
-  toast('已接着记 '+hrs(end-start+1)+' · '+(CMAP[k]?CMAP[k].n:'未分类'));
+function clampInt(v,lo,hi,def){v=parseInt(v,10);if(isNaN(v))v=def;return Math.max(lo,Math.min(hi,v));}
+function stepM(n){var v=clampInt(edH1.value,0,23,0)*60+clampInt(edM1.value,0,59,0)+n;if(v<0)v=0;if(v>1410)v=1410;edH1.value=Math.floor(v/60)%24;edM1.value=v%60;updateEdDur();}
+function stepM2(n){var v=clampInt(edH2.value,0,23,0)*60+clampInt(edM2.value,0,59,0)+n;if(v<0)v=0;if(v>1410)v=1410;edH2.value=Math.floor(v/60)%24;edM2.value=v%60;updateEdDur();}
+function updateEdDur(){
+  var t=getEdTime();
+  var span=t.e-t.s; if(span<=0)span=30;
+  edDurLab.textContent='共 '+hrs(span);
+  var cross = (clampInt(edH2.value,0,23,0) < clampInt(edH1.value,0,23,0));
+  document.getElementById('edTimeRead').textContent='从 '+pad(edH1.value)+':'+pad(edM1.value)+' 到 '+pad(edH2.value)+':'+pad(edM2.value)+(cross?'（跨夜到第二天）':'');
 }
-function autoSleep(d){
-  if(S.cfg.autoSleep&&S.cfg.autoSleep[d])return;
-  var slots=[45,46,47,0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15];
-  if(d===todayStr()){var ns=nowSlot();slots=slots.filter(function(s){return s<=ns});if(!slots.length)return;}
-  var dd=day(d), empty=slots.every(function(s){return dd.g[s]==='.'});
-  S.cfg.autoSleep=S.cfg.autoSleep||{};
-  S.cfg.autoSleep[d]=true;
-  if(!empty){save();return;}
-  slots.forEach(function(s){var g=dd.g.split('');g[s]='L';dd.g=g.join('');dd.t[s]='睡觉';});
-  save();
-}
-function jumpDay(ds){curDate=ds;setPane('rec');renderRec();centerNow()}
 function renderEdCats(){
   var h='';
   CATS.forEach(function(c){
     h+='<button class="cp'+(edCat===c.k?' on':'')+'" onclick="edCat=\''+c.k+'\';renderEdCats()"><i style="background:'+c.c+'"></i>'+esc(c.n)+'</button>';
   });
   h+='<button class="cp'+(edCat==='L'?' on':'')+'" onclick="edCat=\'L\';renderEdCats()"><i style="background:'+LIFE.c+'"></i>'+esc(LIFE.n)+'</button>';
-  h+='<button class="cp'+(edCat==='.'?' on':'')+'" onclick="edCat=\'.\';renderEdCats()"><i style="background:#EFEEE9;border:1px solid #D3D1C7"></i>不分类</button>';
+  h+='<button class="cp'+(edCat==='.'?' on':'')+'" onclick="edCat=\'.\';renderEdCats()"><i style="background:var(--empn);border:1px solid var(--line2)"></i>不分类</button>';
   document.getElementById('edCats').innerHTML=h;
 }
 function renderRecent(){
@@ -971,87 +1038,77 @@ function renderRecent(){
   document.getElementById('edRecent').innerHTML=r.slice(0,8).map(function(t){
     return '<button class="rc" onclick="document.getElementById(\'edText\').value=this.textContent">'+esc(t)+'</button>'}).join('');
 }
-function stepTo(n){
-  var maxTo=(edDay===todayStr())?nowSlot():47;
-  edToSlot+=n;
-  if(edToSlot<edA)edToSlot=edA;
-  if(edToSlot>maxTo)edToSlot=maxTo;
-  renderEdSteps();
-}
-function renderEdSteps(){
-  document.getElementById('edFrom').textContent=slotLab(edA);
-  document.getElementById('edTo').textContent=slotLab(edToSlot+1);
-  document.getElementById('edDurLab').textContent='共 '+hrs(edToSlot-edA+1);
-  document.getElementById('edTimeRead').textContent=(edMode==='cont'?'接着上一段，从 ':'从 ')+slotLab(edA)+' 到 '+slotLab(edToSlot+1);
-}
-function updateEdTitle(){
-  document.getElementById('edTitle').textContent = edMode==='cont' ? '接着记一段' : (edMode==='cell' ? '编辑这段' : (edMode==='plan' ? '预备安排（计划）' : '记录'));
+function renderSegList(){
+  var evs=hourEvents(edDay,edHour);
+  var box=document.getElementById('edSegList');
+  if(!evs.length){box.innerHTML='<div class="mut3" style="padding:10px;font-size:12px">本小时还没有段落</div>';return;}
+  box.innerHTML=evs.map(function(ev){
+    var cat=CMAP[ev.cat]||LIFE;
+    var rng=fmtHM(ev.s)+'-'+fmtHM(ev.e%1440);
+    var gid=ev.gid||ev.id;
+    return '<div class="segrow"><span class="sstripe" style="background:'+cat.c+'"></span>'+
+      '<span class="srange">'+rng+'</span>'+
+      '<span class="scat" style="color:'+txtOn(cat.c)+'">'+esc(cat.n)+(ev.plan?'（计划）':'')+'</span>'+
+      '<span class="snote">'+esc(ev.t||'')+'</span>'+
+      '<button class="sbtn" onclick="editEvent(\''+edDay+'\',\''+gid+'\')">改</button>'+
+      '<button class="sbtn del" onclick="delEvent(\''+edDay+'\',\''+gid+'\');renderSegList();renderRec();toast(\'已删除该段\')">删</button></div>';
+  }).join('');
 }
 function saveSeg(){
-  var d=edDay, dd=day(d);
-  var tx=document.getElementById('edText').value.trim();
-  if(edMode==='plan'){
-    dd.p=dd.p||{};
-    if(edCat==='.'){ delete dd.p[edA]; }
-    else { dd.p[edA]={c:edCat,t:tx}; if(S.cfg.lastCat!==edCat)S.cfg.lastCat=edCat; }
-    if(tx){var r=S.cfg.recent||[];r=r.filter(function(x){return x!==tx});r.unshift(tx);S.cfg.recent=r.slice(0,12);}
-    save();closeEdit();renderRec();renderToday();renderStat();
-    toast(edCat==='.'?'已删除该预备安排':'已安排预备 '+slotLab(edA)+' · '+(CMAP[edCat]?CMAP[edCat].n:'未分类'));
-    return;
+  var t=getEdTime();
+  if(t.e<=t.s){toast('结束必须晚于开始');return;}
+  var d=edDay, cat=edCat, tx=document.getElementById('edText').value.trim();
+  if(edPlan && !editableEv(d,t.s) && (d!==todayStr()||t.s>minNow())){ /* 未来计划保持 plan */ }
+  if(edEvId){
+    delEvent(d,edEvId);
   }
-  var ok=0, blocked=0;
-  for(var i=edA;i<=edToSlot;i++){
-    if(!editable(d,i)){blocked++;continue;}
-    var g=dd.g.split(''); g[i]=edCat; dd.g=g.join('');
-    if(tx)dd.t[i]=tx; else delete dd.t[i];
-    if(diffD(todayStr(),d)>0)dd.mu=true;
-    ok++;
-  }
-  if(edCat!=='.')S.cfg.lastCat=edCat;
+  if(cat==='.'){ /* 不分类：仅当编辑已存在时删除，不新建 */ if(edEvId){save();closeEdit();renderRec();renderToday();renderStat();toast('已清空该段');} else {toast('请选择分类');} return; }
+  var gid=edEvId||uid();
+  var plan = edPlan;
+  if(t.e<=1440){ addEvent(d,{id:uid(),gid:gid,cat:cat,s:t.s,e:t.e,t:tx,plan:plan}); }
+  else { addEvent(d,{id:uid(),gid:gid,cat:cat,s:t.s,e:1440,t:tx,plan:plan}); addEvent(addD(d,1),{id:uid(),gid:gid,cat:cat,s:0,e:t.e-1440,t:tx,plan:plan}); }
+  if(!plan && cat!=='.')S.cfg.lastCat=cat;
   if(tx){var r=S.cfg.recent||[];r=r.filter(function(x){return x!==tx});r.unshift(tx);S.cfg.recent=r.slice(0,12);}
   save();closeEdit();renderRec();renderToday();renderStat();
-  toast(ok?('已记录 '+hrs(ok)+(blocked?'（'+blocked+' 格暂不可填）':'')):'没有可记录的时段');
+  toast(plan?'已安排预备 '+fmtHM(t.s)+' · '+catName(cat):'已记录 '+fmtHM(t.s)+'-'+fmtHM(t.e%1440)+' · '+catName(cat));
 }
 function clearSeg(){
-  var d=edDay, dd=day(d);
-  if(edMode==='plan'){ if(dd.p)delete dd.p[edA]; save();closeEdit();renderRec();renderToday();renderStat();toast('已删除预备安排'); return; }
-  var ok=0;
-  for(var i=edA;i<=edToSlot;i++){if(!editable(d,i))continue;var g=dd.g.split('');g[i]='.';delete dd.t[i];dd.g=g.join('');ok++}
-  save();closeEdit();renderRec();renderToday();renderStat();toast('已清空 '+hrs(ok));
+  if(edEvId){ delEvent(edDay,edEvId); save();closeEdit();renderRec();renderToday();renderStat();toast('已清空该段'); }
+  else { closeEdit(); }
 }
-function edToRecord(d,s){
-  if(d===undefined){d=edDay;s=edA;}
-  var dd=day(d), pl=(dd.p&&dd.p[s])||null;
-  if(!pl){closeEdit();return;}
-  if(!editable(d,s)){toast('这段还不可转为正式记录');return;}
-  var g=dd.g.split(''); g[s]=pl.c; dd.g=g.join('');
-  if(pl.t)dd.t[s]=pl.t; else delete dd.t[s];
-  delete dd.p[s];
-  if(S.cfg.lastCat!==pl.c)S.cfg.lastCat=pl.c;
-  save();closeEdit();renderRec();renderToday();renderStat();
-  toast('已转为正式记录 '+slotLab(s)+' · '+(CMAP[pl.c]?CMAP[pl.c].n:'未分类'));
-}
-function renderPlanList(){
-  var d=curDate, dd=day(d), p=dd.p||{};
-  var keys=Object.keys(p).map(Number).filter(function(s){return p[s]}).sort(function(a,b){return a-b});
-  var card=document.getElementById('planCard');
-  if(!keys.length){card.style.display='none';return;}
-  card.style.display='block';
-  document.getElementById('planCount').textContent=keys.length+' 项';
-  var h=keys.map(function(s){
-    var pl=p[s], cat=CMAP[pl.c]||LIFE, arrived=absBeforeNow(d,s);
-    var note=pl.t?(' · '+esc(pl.t)):'';
-    return '<div class="planitem'+(arrived?' arrived':'')+'" onclick="'+(arrived?('edToRecord(\''+d+'\','+s+')'):('openPlan(\''+d+'\','+s+')'))+'">'+
-      '<span class="pstripe" style="background:'+cat.c+'"></span>'+
-      '<span class="ptm">'+slotLab(s)+'</span>'+
-      '<span class="pcat" style="color:'+cat.c+'">'+esc(cat.n)+'</span>'+
-      '<span class="pnote">'+note+'</span>'+
-      (arrived?'<span class="pbadge">到点·点此转正式</span>':'')+
-      '</div>';
-  }).join('');
-  document.getElementById('planList').innerHTML=h;
+function edToRecord(){
+  if(!edEvId)return;
+  var ev=eventsOf(edDay).filter(function(e){return (e.gid||e.id)===edEvId;})[0];
+  if(!ev){closeEdit();return;}
+  if(!editableEv(edDay,ev.s)){toast('这段还不可转为正式记录');return;}
+  ev.plan=false; save();closeEdit();renderRec();renderToday();renderStat();
+  toast('已转为正式记录 '+fmtHM(ev.s)+' · '+catName(ev.cat));
 }
 function closeEdit(){document.getElementById('editMask').classList.remove('on')}
+
+/* 接着记 */
+function quickContinue(k){
+  if(!dayEditable(curDate)){toast(permLocked(curDate)?'该日期已锁定，无法补记':'想补这一天不可用');return;}
+  var d=curDate, start=lastEventEnd(d), isT=(d===todayStr());
+  var end=isT?minNow():1440;
+  if(start>=end){toast('已记到当前时间，等下一格再记');return;}
+  if(start<=0)start=0;
+  addEvent(d,{id:uid(),gid:uid(),cat:k,s:start,e:end,t:'',plan:false});
+  if(k!=='.')S.cfg.lastCat=k;
+  save();renderRec();renderToday();renderStat();
+  toast('已接着记 '+hrs(end-start)+' · '+(CMAP[k]?CMAP[k].n:'未分类'));
+}
+function autoSleep(d){
+  if(S.cfg.autoSleep&&S.cfg.autoSleep[d])return;
+  S.cfg.autoSleep=S.cfg.autoSleep||{};S.cfg.autoSleep[d]=true;save();
+  var ranges=[[23*60,24*60],[0,7*60]];
+  if(d===todayStr()){ var nm=minNow(); ranges=ranges.map(function(r){return [r[0],Math.min(r[1],nm)];}).filter(function(r){return r[1]>r[0];}); if(!ranges.length)return; }
+  ranges.forEach(function(r){
+    var busy=recordsOf(d).some(function(e){return Math.max(e.s,r[0])<Math.min(e.e,r[1]);});
+    if(!busy){ addEvent(d,{id:uid(),gid:uid(),cat:'L',s:r[0],e:r[1],t:'睡觉',plan:false}); }
+  });
+  save();
+}
 
 /* ===== 每日心情 ===== */
 function firstEmoji(s){var m=/[\uD800-\uDBFF][\uDC00-\uDFFF]/.exec(s);return m?m[0]:''}
@@ -1103,20 +1160,19 @@ function renderGrumble(){
 
 /* ===== 今天要处理 ===== */
 function renderToday(){
-  var items=[],t=todayStr(),ns=nowSlot(),d=day(t),miss=0,hh=new Date().getHours();
-  for(var i=0;i<=ns;i++)if(d.g[i]==='.')miss++;
-  if(miss>0)items.push({u:hh>=21,t:'今天已过去 '+(ns+1)+' 格，还有 <b>'+miss+' 格</b>空着'+(hh>=21?'（该回顾了）':''),b:'去填',f:'goToday();setPane(\'rec\')'});
+  var items=[],t=todayStr(),miss=Math.max(0,Math.min(minNow(),1440)-filledMinutes(t)),hh=new Date().getHours();
+  if(miss>0)items.push({u:hh>=21,t:'今天已过去到 '+fmtHM(minNow())+'，还有 <b>'+hrs(miss)+'</b>空着'+(hh>=21?'（该回顾了）':''),b:'去填',f:'goToday();setPane(\'rec\')'});
   for(var k=1;k<=1;k++){
     var ds=addD(t,-k);if(!hasDay(ds))continue;
-    var m=cnt(S.days[ds].g,'.');
-    if(m>0&&m<48)items.push({u:true,t:cnDate(ds)+' 还有 <b>'+m+' 格</b>空着，今天还能补',b:'补记',f:'jumpDay(\''+ds+'\')'});
+    var m=1440-filledMinutes(ds);
+    if(m>0&&m<1440)items.push({u:true,t:cnDate(ds)+' 还有 <b>'+hrs(m)+'</b>空着，今天还能补',b:'补记',f:'jumpDay(\''+ds+'\')'});
   }
   var byTag={};
   S.ideas.filter(function(x){return !x.done}).forEach(function(x){(byTag[x.tag]=byTag[x.tag]||[]).push(x)});
   Object.keys(byTag).forEach(function(tg){
     if(byTag[tg].length>=5)items.push({u:false,t:'「'+esc(tg)+'」已攒 <b>'+byTag[tg].length+' 条</b>碎片，火候到了',b:'整理成文',f:'setPane(\'idea\');composeTag(\''+esc(tg).replace(/'/g,'')+'\')'});
   });
-  var stale=S.ideas.filter(function(x){return !x.done&&diffD(t,x.ts)>STALE});
+  var stale=S.ideas.filter(function(x){return !x.done&&diffD(todayStr(),x.ts)>STALE});
   if(stale.length)items.push({u:false,t:'有 <b>'+stale.length+' 条</b>碎片放了超过 '+STALE+' 天，要么写掉要么删掉',b:'去处理',f:'setPane(\'idea\')'});
   var nd=Object.keys(S.days).length;
   if(nd>=30&&!S.cfg.exported)items.push({u:false,t:'已记录 <b>'+nd+' 天</b>，建议导出备份',b:'导出',f:'exportJSON()'});
@@ -1128,9 +1184,7 @@ function renderToday(){
   document.getElementById('tdNum').textContent=items.length;
   badge.classList.toggle('urg',items.some(function(it){return it.u}));
 }
-/* makeupJump 已移除；补记走 jumpDay */
-function openToday(){document.getElementById('todayModal').classList.add('on')}
-function closeToday(){document.getElementById('todayModal').classList.remove('on')}
+function jumpDay(ds){curDate=ds;setPane('rec');renderRec();}
 
 /* ===== 统计 ===== */
 function setSV(v){sv=v;svOff=0;document.querySelectorAll('.seg').forEach(function(b){b.classList.toggle('on',b.dataset.sv===v)});renderStat()}
@@ -1149,39 +1203,37 @@ function rangeDates(){
   for(var mo=0;mo<12;mo++){var d2=new Date(y,mo+1,0).getDate();for(i=1;i<=d2;i++)out.push(y+'-'+pad(mo+1)+'-'+pad(i))}
   return {ds:out,title:y+'年'};
 }
-function tally(ds){
+function tallyEv(ds){
   var c={};CATS.forEach(function(x){c[x.k]=0});var tot=0,rec=0;
-  ds.forEach(function(d){if(!hasDay(d))return;var g=S.days[d].g,any=0;
-    for(var i=0;i<48;i++){var ch=g[i];if(ch!=='.'&&c[ch]!==undefined){c[ch]++;tot++;any=1}}
+  ds.forEach(function(d){if(!hasDay(d))return;var any=0;
+    recordsOf(d).forEach(function(ev){ if(c[ev.cat]!==undefined){c[ev.cat]+=(ev.e-ev.s);tot+=(ev.e-ev.s);any=1;} });
     if(any)rec++});
   return {c:c,tot:tot,rec:rec};
 }
 function renderStat(){
-  var r=rangeDates(),st=tally(r.ds);
+  var r=rangeDates(),st=tallyEv(r.ds);
   document.getElementById('svTitle').textContent=r.title;
   document.getElementById('svNext').disabled=(svOff>=0);
   var h='<div class="kpis">'+kpi(st.rec+' 天','有记录天数')+kpi(hrs(st.tot),'已记录时长')+
-    kpi((st.rec?Math.round(st.tot/st.rec/48*100):0)+'%','日均覆盖率')+kpi(topCat(st.c),'时间最多')+'</div>';
+    kpi((st.rec?Math.round(st.tot/st.rec/1440*100):0)+'%','日均覆盖率')+kpi(topCat(st.c),'时间最多')+'</div>';
   if(st.tot===0){h+='<div class="hint">这个区间还没有记录。先去记录页填几段。</div>';
     document.getElementById('statBody').innerHTML=h;renderDerive();return}
   if(sv==='day'){h+=dayWeather(r.ds[0])+dayMood(r.ds[0])+donut(st.c,st.tot)+ribbon(r.ds[0])+dayGrumble(r.ds[0])}
-  else if(sv==='week'){h+=stacked(r.ds.map(function(d){var w=wxOf(d),m=day(d).m||'',gr=(day(d).gr||[]).length;return {lab:'日一二三四五六'[pd(d).getDay()],c:tally([d]).c,wx:w?wxEmoji(w):'',mood:m?firstEmoji(m):'',gr:gr}}))}
+  else if(sv==='week'){h+=stacked(r.ds.map(function(d){var w=wxOf(d),m=day(d).m||'',gr=(day(d).gr||[]).length;return {lab:'日一二三四五六'[pd(d).getDay()],c:tallyEv([d]).c,wx:w?wxEmoji(w):'',mood:m?firstEmoji(m):'',gr:gr}}))}
   else if(sv==='month'){h+=heat(r.ds)+stacked(weekB(r.ds))}
   else{var mb=[];for(var m=0;m<12;m++){var sub=r.ds.filter(function(d){return +d.split('-')[1]===m+1});
-    mb.push({lab:(m+1),c:tally(sub).c})}h+=stacked(mb)}
+    mb.push({lab:(m+1),c:tallyEv(sub).c})}h+=stacked(mb)}
   h+='<div style="margin-top:16px">'+catBars(st.c,st.tot)+'</div>';
   h+=weatherReview(r.ds)+moodReview(r.ds);
   if(sv==='year'&&st.rec<90)h+='<div class="hint">已记录 '+st.rec+' 天，再有约 '+(90-st.rec)+' 天，年度规律才会真正显现。</div>';
   document.getElementById('statBody').innerHTML=h;renderDerive();renderGoals();
 }
 function dayWeather(d){var w=wxOf(d);if(!w)return '';
-  return '<div class="wxstat">'+wxEmoji(w)+'<span>'+esc(w)+'</span></div>';
-}
+  return '<div class="wxstat">'+wxEmoji(w)+'<span>'+esc(w)+'</span></div>';}
 function dayMood(d){var m=day(d).m||'';if(!m)return '';return '<div class="moodstat">💭 <span>'+esc(m)+'</span></div>';}
 function dayGrumble(d){var gr=day(d).gr||[];if(!gr.length)return '';
   return '<h3 style="margin-top:14px">💢 这天的牢骚（'+gr.length+' 条）</h3><div class="nlist">'+gr.map(function(g){
-    return '<div class="nitem"><span class="ntime">'+esc(g.t)+'</span><span style="flex:1">'+esc(g.x)+'</span></div>'}).join('')+'</div>';
-}
+    return '<div class="nitem"><span class="ntime">'+esc(g.t)+'</span><span style="flex:1">'+esc(g.x)+'</span></div>'}).join('')+'</div>';}
 function moodReview(ds){
   var moods=[],gr=[];
   ds.forEach(function(d){
@@ -1220,7 +1272,7 @@ function weatherReview(ds){
 }
 function kpi(v,l){return '<div class="kpi"><div class="v">'+v+'</div><div class="l">'+l+'</div></div>'}
 function topCat(c){var b='',m=0;CATS.forEach(function(x){if(c[x.k]>m){m=c[x.k];b=x.n}});return b||'—'}
-function weekB(ds){var o=[],i=0,w=1;while(i<ds.length){o.push({lab:'第'+w+'周',c:tally(ds.slice(i,i+7)).c});i+=7;w++}return o}
+function weekB(ds){var o=[],i=0,w=1;while(i<ds.length){o.push({lab:'第'+w+'周',c:tallyEv(ds.slice(i,i+7)).c});i+=7;w++}return o}
 function polar(cx,cy,r,a){var t=(a-90)*Math.PI/180;return [cx+r*Math.cos(t),cy+r*Math.sin(t)]}
 function donut(c,tot){
   var cx=110,cy=110,r2=88,r1=54,a=0,p='';
@@ -1232,14 +1284,16 @@ function donut(c,tot){
       'L'+s2[0].toFixed(1)+' '+s2[1].toFixed(1)+'A'+r1+' '+r1+' 0 '+lf+' 0 '+e2[0].toFixed(1)+' '+e2[1].toFixed(1)+'Z" fill="'+x.c+'"/>';
     a=a1});
   return '<div style="display:flex;justify-content:center;margin-top:14px"><svg width="220" height="220" viewBox="0 0 220 220">'+p+
-   '<text x="110" y="104" text-anchor="middle" font-size="26" font-weight="600" fill="#2C2C2A">'+hrs(tot)+'</text>'+
-   '<text x="110" y="126" text-anchor="middle" font-size="12" fill="#8B8A83">已记录</text></svg></div>';
+   '<text x="110" y="104" text-anchor="middle" font-size="26" font-weight="600" fill="#0A2540">'+hrs(tot)+'</text>'+
+   '<text x="110" y="126" text-anchor="middle" font-size="12" fill="var(--tx3)">已记录</text></svg></div>';
 }
 function ribbon(d){
   if(!hasDay(d))return '';
-  var g=S.days[d].g,w=600,bw=w/48,p='';
-  for(var i=0;i<48;i++){var ch=g[i];p+='<rect x="'+(i*bw).toFixed(2)+'" y="0" width="'+(bw-0.6).toFixed(2)+'" height="26" rx="2" fill="'+(ch==='.'||!CMAP[ch]?'#EFEEE9':CMAP[ch].c)+'"/>'}
-  for(var q=0;q<=24;q+=6)p+='<text x="'+Math.min(q*2*bw,w-8)+'" y="42" font-size="11" fill="#8B8A83" text-anchor="'+(q===0?'start':(q===24?'end':'middle'))+'">'+q+':00</text>';
+  var occ=new Array(48).fill('.');
+  recordsOf(d).forEach(function(ev){ for(var m=Math.max(0,ev.s);m<Math.min(1440,ev.e);m++){occ[Math.floor(m/30)]=ev.cat;} });
+  var w=600,bw=w/48,p='';
+  for(var i=0;i<48;i++){var ch=occ[i];p+='<rect x="'+(i*bw).toFixed(2)+'" y="0" width="'+(bw-0.6).toFixed(2)+'" height="26" rx="2" fill="'+(ch==='.'||!CMAP[ch]?'var(--empn)':CMAP[ch].c)+'"/>'}
+  for(var q=0;q<=24;q+=6)p+='<text x="'+Math.min(q*2*bw,w-8)+'" y="42" font-size="11" fill="var(--tx3)" text-anchor="'+(q===0?'start':(q===24?'end':'middle'))+'">'+q+':00</text>';
   return '<div style="margin-top:14px;overflow-x:auto"><svg width="100%" viewBox="0 0 '+w+' 46" preserveAspectRatio="none" style="min-width:300px;height:46px">'+p+'</svg></div>';
 }
 function stacked(rows){
@@ -1251,33 +1305,33 @@ function stacked(rows){
     CATS.forEach(function(cat){var v=r.c[cat.k];if(!v)return;
       var hg=v/max*ph;y-=hg;
       p+='<rect x="'+x.toFixed(1)+'" y="'+y.toFixed(1)+'" width="'+bd.toFixed(1)+'" height="'+hg.toFixed(1)+'" fill="'+cat.c+'"/>'});
-    p+='<text x="'+(pl+idx*bw+bw/2).toFixed(1)+'" y="'+(h-26)+'" font-size="11" fill="#8B8A83" text-anchor="middle">'+r.lab+'</text>';
+    p+='<text x="'+(pl+idx*bw+bw/2).toFixed(1)+'" y="'+(h-26)+'" font-size="11" fill="var(--tx3)" text-anchor="middle">'+r.lab+'</text>';
     if(r.wx||r.mood||r.gr){
       var mark=(r.wx||'')+(r.mood?(' '+(r.mood)):'')+(r.gr?(' 💢'+r.gr):'');
       p+='<text x="'+(pl+idx*bw+bw/2).toFixed(1)+'" y="'+(h-12)+'" font-size="11.5" text-anchor="middle">'+mark+'</text>';
     }});
   var gl='';
   for(var q=0;q<=2;q++){var y=10+ph-(q/2)*ph;
-    gl+='<line x1="'+pl+'" y1="'+y.toFixed(1)+'" x2="'+(w-10)+'" y2="'+y.toFixed(1)+'" stroke="#EDECE6"/>'+
-    '<text x="'+(pl-6)+'" y="'+(y+4).toFixed(1)+'" font-size="10" fill="#B4B2A9" text-anchor="end">'+(max*q/4).toFixed(0)+'h</text>'}
+    gl+='<line x1="'+pl+'" y1="'+y.toFixed(1)+'" x2="'+(w-10)+'" y2="'+y.toFixed(1)+'" stroke="var(--empn)"/>'+
+    '<text x="'+(pl-6)+'" y="'+(y+4).toFixed(1)+'" font-size="10" fill="var(--tx3)" text-anchor="end">'+(max*q/4/60).toFixed(0)+'h</text>'}
   return '<div style="margin-top:14px;overflow-x:auto"><svg width="100%" viewBox="0 0 '+w+' '+h+'" style="min-width:340px">'+gl+p+'</svg></div>';
 }
 function heat(ds){
   var first=pd(ds[0]),off=(first.getDay()+6)%7,cell=30,gap=4,w=7*cell+6*gap;
   var rows=Math.ceil((off+ds.length)/7),h=rows*(cell+gap)+24,p='';
-  ['一','二','三','四','五','六','日'].forEach(function(x,i){p+='<text x="'+(i*(cell+gap)+cell/2)+'" y="12" font-size="10" fill="#B4B2A9" text-anchor="middle">'+x+'</text>'});
+  ['一','二','三','四','五','六','日'].forEach(function(x,i){p+='<text x="'+(i*(cell+gap)+cell/2)+'" y="12" font-size="10" fill="var(--tx3)" text-anchor="middle">'+x+'</text>'});
   ds.forEach(function(d,idx){
     var pos=off+idx,cx=(pos%7)*(cell+gap),cy=Math.floor(pos/7)*(cell+gap)+22;
-    var f=hasDay(d)?48-cnt(S.days[d].g,'.'):0,ra=f/48;
+    var f=hasDay(d)?filledMinutes(d):0,ra=f/1440;
     var ww=wxOf(d),we=ww?wxEmoji(ww):'';
     var mm=day(d).m||'',me=mm?firstEmoji(mm):'';
-    p+='<rect x="'+cx+'" y="'+cy+'" width="'+cell+'" height="'+cell+'" rx="6" fill="'+(f===0?'#F1EFE8':shade(ra))+'"><title>'+d+' · '+f+'/48'+(ww?(' · '+esc(ww)):'')+(mm?(' · '+esc(mm)):'')+'</title></rect>';
-    p+='<text x="'+(cx+cell/2)+'" y="'+(cy+cell/2+4)+'" font-size="10" fill="'+(ra>0.55?'#fff':'#8B8A83')+'" text-anchor="middle">'+(+d.split('-')[2])+'</text>';
-    if(we||me)p+='<text x="'+(cx+cell/2)+'" y="'+(cy+cell-4)+'" font-size="9" text-anchor="middle" fill="'+(ra>0.55?'#fff':'#8B8A83')+'" opacity=".85">'+(we||'')+(me?(' '+(me)):'')+'</text>'});
+    p+='<rect x="'+cx+'" y="'+cy+'" width="'+cell+'" height="'+cell+'" rx="6" fill="'+(f===0?'var(--line2)':shade(ra))+'"><title>'+d+' · '+(f/60).toFixed(1)+'h'+(ww?(' · '+esc(ww)):'')+(mm?(' · '+esc(mm)):'')+'</title></rect>';
+    p+='<text x="'+(cx+cell/2)+'" y="'+(cy+cell/2+4)+'" font-size="10" fill="'+(ra>0.55?'#fff':'var(--tx)')+'" text-anchor="middle">'+(+d.split('-')[2])+'</text>';
+    if(we||me)p+='<text x="'+(cx+cell/2)+'" y="'+(cy+cell-4)+'" font-size="9" text-anchor="middle" fill="'+(ra>0.55?'#fff':'var(--tx)')+'" opacity=".85">'+(we||'')+(me?(' '+(me)):'')+'</text>'});
   return '<div style="margin-top:14px;overflow-x:auto"><svg width="100%" viewBox="0 0 '+w+' '+h+'" style="max-width:'+w+'px">'+p+'</svg></div>'+
    '<div class="mut3" style="margin-top:4px">颜色越深，当天记录越完整</div>';
 }
-function shade(r){var s=[238,237,254],e=[83,74,183];
+function shade(r){var s=[231,229,224],e=[54,52,46];
   return 'rgb('+s.map(function(v,i){return Math.round(v+(e[i]-v)*Math.min(1,r*1.05))}).join(',')+')'}
 function catBars(c,tot){
   return CATS.slice().sort(function(a,b){return c[b.k]-c[a.k]}).map(function(x){
@@ -1290,7 +1344,7 @@ function renderDerive(){
   CATS.slice(0,3).forEach(function(x){h+=kpi(streak(x.k)+' 天','「'+esc(x.n)+'」连续')});
   h+='</div>';
   var l30=[];for(var i=0;i<30;i++)l30.push(addD(todayStr(),-i));
-  var t30=tally(l30);
+  var t30=tallyEv(l30);
   if(t30.tot>0){
     var rk=CATS.slice().sort(function(a,b){return t30.c[b.k]-t30.c[a.k]}).filter(function(x){return t30.c[x.k]>0}).slice(0,3);
     h+='<h3 style="margin-top:16px">近 30 天的兴趣规律</h3><div class="nlist">';
@@ -1300,23 +1354,21 @@ function renderDerive(){
   }
   var notes=[];
   Object.keys(S.days).sort().reverse().forEach(function(d){
-    var t=S.days[d].t||{},seen={};
-    Object.keys(t).sort(function(a,b){return a-b}).forEach(function(i){
-      var key=t[i];if(seen[key])return;seen[key]=1;
-      notes.push({d:d,t:key,c:S.days[d].g[i],i:+i})})});
+    (eventsOf(d).filter(function(e){return e.t&&!e.plan;})).forEach(function(e){ notes.push({d:d,t:e.t,c:e.cat}); });
+  });
   h+='<h3 style="margin-top:16px">做过的事（最近 '+Math.min(notes.length,10)+' 条 / 共 '+notes.length+' 条）</h3>';
   if(!notes.length)h+='<div class="empty">还没有文字记录。在时间段里写一句，就会汇总到这里。</div>';
   else h+='<div class="nlist">'+notes.slice(0,10).map(function(x){
     return '<div class="nitem"><span class="ntime">'+cnDate(x.d).replace(/ 周./,'')+'</span>'+
-      (x.c!=='.'&&CMAP[x.c]?'<i style="width:9px;height:9px;border-radius:3px;background:'+CMAP[x.c].c+';flex:none"></i>':'')+
+      (x.c&&CMAP[x.c]?'<i style="width:9px;height:9px;border-radius:3px;background:'+CMAP[x.c].c+';flex:none"></i>':'')+
       '<span style="flex:1">'+esc(x.t)+'</span></div>'}).join('')+'</div>';
   document.getElementById('derive').innerHTML=h;
 }
 function streak(k){var n=0,d=todayStr();
-  if(!(hasDay(d)&&S.days[d].g.indexOf(k)>=0))d=addD(d,-1);
-  while(hasDay(d)&&S.days[d].g.indexOf(k)>=0){n++;d=addD(d,-1)}return n}
+  if(!(hasDay(d)&&recordsOf(d).some(function(e){return e.cat===k;})))d=addD(d,-1);
+  while(hasDay(d)&&recordsOf(d).some(function(e){return e.cat===k;})){n++;d=addD(d,-1)}return n}
 function peak(k,ds){var c=new Array(24).fill(0);
-  ds.forEach(function(d){if(!hasDay(d))return;var g=S.days[d].g;for(var i=0;i<48;i++)if(g[i]===k)c[Math.floor(i/2)]++});
+  ds.forEach(function(d){if(!hasDay(d))return;recordsOf(d).forEach(function(e){for(var m=Math.max(0,e.s);m<Math.min(1440,e.e);m++)c[Math.floor(m/60)]++;});});
   var m=0,b=0;for(var i=0;i<24;i++)if(c[i]>m){m=c[i];b=i}
   return pad(b)+':00-'+pad((b+1)%24)+':00'}
 
@@ -1391,7 +1443,6 @@ function renderCatMgr(){
       '<button class="btn sm dan" onclick="delCat('+i+')">删除</button></div>'}).join('');
 }
 function setCat(i,f,v){CATS[i][f]=v;loadCats2();save();renderCatMgr();renderRec();renderStat()}
-function loadCats2(){CMAP={};CATS.forEach(function(c){CMAP[c.k]=c});CMAP['L']=LIFE}
 function addCat(){
   var n=document.getElementById('newCat').value.trim();
   if(!n){toast('先输入名称');return}
@@ -1416,17 +1467,16 @@ function dl(txt,name,mime,bom){
 }
 function exportJSON(){
   S.cfg.exported=todayStr();save();
-  dl(JSON.stringify({v:2,exportedAt:new Date().toISOString(),days:S.days,ideas:S.ideas,posts:S.posts,cats:CATS,cfg:S.cfg},null,1),
+  dl(JSON.stringify({v:3,exportedAt:new Date().toISOString(),days:S.days,ideas:S.ideas,posts:S.posts,cats:CATS,cfg:S.cfg},null,1),
     '时间记录台备份_'+todayStr()+'.json');
   renderToday();toast('备份已下载');
 }
 function exportCSV(){
   var rows=['日期,开始,结束,时长(小时),分类,内容'];
   Object.keys(S.days).sort().forEach(function(d){
-    segs(S.days[d]).forEach(function(s){
-      if(s.k==='.'&&!s.t)return;
-      rows.push([d,slotLab(s.a),slotLab(s.b+1),((s.b-s.a+1)/2).toFixed(1),
-        (s.k!=='.'&&CMAP[s.k]?CMAP[s.k].n:''),'"'+String(s.t||'').replace(/"/g,'""')+'"'].join(','))})});
+    recordsOf(d).forEach(function(ev){
+      rows.push([d,fmtHM(ev.s),fmtHM(ev.e%1440),((ev.e-ev.s)/60).toFixed(2),
+        (CMAP[ev.cat]?CMAP[ev.cat].n:''),'"'+String(ev.t||'').replace(/"/g,'""')+'"'].join(','))})});
   dl(rows.join('\n'),'时间记录_'+todayStr()+'.csv','text/csv',true);toast('CSV 已下载');
 }
 function importJSON(inp){
@@ -1441,7 +1491,7 @@ function importJSON(inp){
       if(o.cats&&o.cats.length){CATS=o.cats;loadCats2()}
       if(o.ideas&&o.ideas.length){var ex={};S.ideas.forEach(function(x){ex[x.id]=1});o.ideas.forEach(function(x){if(!ex[x.id])S.ideas.push(x)})}
       if(o.posts&&o.posts.length){var ep={};S.posts.forEach(function(x){ep[x.id]=1});o.posts.forEach(function(x){if(!ep[x.id])S.posts.push(x)})}
-      save();renderAll();toast('已导入 '+nd+' 天记录');
+      migrateAll();save();renderAll();toast('已导入 '+nd+' 天记录');
     }catch(e){toast('文件格式不对，导入失败')}
     inp.value='';
   };
@@ -1450,7 +1500,7 @@ function importJSON(inp){
 function clearAll(){
   confirmMask('清空全部数据','删除所有时间记录、想法和观点稿，无法撤销。建议先导出备份。',function(){
     ['days','ideas','posts','cats','cfg'].forEach(function(k){localStorage.removeItem(LS+k)});
-    S={days:{},ideas:[],posts:[],cats:null,cfg:{}};loadCats();renderAll();toast('已全部清空')});
+    S={days:{},ideas:[],posts:[],cats:null,cfg:{}};loadCats();migrateAll();renderAll();toast('已全部清空')});
 }
 
 /* ===== UI ===== */
@@ -1468,6 +1518,7 @@ function closeMask(){document.getElementById('mask').classList.remove('on');_cb=
 document.getElementById('mkOk').onclick=function(){var c=_cb;closeMask();if(c)c()};
 document.getElementById('mask').onclick=function(e){if(e.target===this)closeMask()};
 document.getElementById('editMask').onclick=function(e){if(e.target===this)closeEdit()};
+var edH1=document.getElementById('edH1'),edM1=document.getElementById('edM1'),edH2=document.getElementById('edH2'),edM2=document.getElementById('edM2'),edDurLab=document.getElementById('edDurLab');
 var _tt;
 function toast(m){var e=document.getElementById('toast');e.textContent=m;e.classList.add('on');
   clearTimeout(_tt);_tt=setTimeout(function(){e.classList.remove('on')},1900)}
@@ -1478,72 +1529,32 @@ function storeInfo(){
     S.posts.length+' 篇观点稿 · 占用约 '+(n/1024).toFixed(1)+' KB（上限约 5000 KB）';
 }
 
-/* ===== 示例数据 ===== */
-var _sd=20260804;
-function rnd(){_sd=(_sd*1103515245+12345)%2147483648;return _sd/2147483648}
-function pk(a){return a[Math.floor(rnd()*a.length)]}
-var WORK=['改主图+详情页','剪信息流素材','对标拆解','客服+发货','平铺图转模特图','脚本初稿'];
-var LEARN=['读《纳瓦尔宝典》','看编导课','研究prompt','复盘上周数据','读公众号+做笔记'];
-var FUN=['刷抖音','看剧','打游戏','听歌发呆'];
-var SPORT=['骑车通勤','腹部k3+k4','拉伸+散步','力量训练'];
-var SOCIAL=['和朋友吃饭','家里电话','同行语音聊'];
-function mkDay(dow,ds){
-  var g=EMPTY.split(''),t={};
-  function set(a,b,k,tx){for(var i=a;i<b;i++){g[i]=k;if(tx)t[i]=tx}}
-  var weekend=(dow===0||dow===6);
-  if(weekend){
-    set(18,20,'1',pk(LEARN));
-    set(20,24,'2',pk(WORK));
-    set(26,30,'3',pk(FUN));
-    if(rnd()>0.5)set(30,33,'5',pk(SOCIAL));else set(30,33,'1',pk(LEARN));
-    set(36,38,'4',pk(SPORT));
-    set(39,43,rnd()>0.5?'1':'3',rnd()>0.5?pk(LEARN):pk(FUN));
-    set(44,48,'L','睡觉');
-  }else{
-    set(16,17,'4','骑车通勤');
-    set(17,23,'2',pk(WORK));
-    set(26,36,'2',pk(WORK));
-    set(36,37,'4','骑车通勤');
-    if(rnd()>0.6)set(38,40,'5',pk(SOCIAL));
-    set(40,43,rnd()>0.45?'1':'3',rnd()>0.45?pk(LEARN):pk(FUN));
-    if(rnd()>0.5)set(43,44,'4',pk(SPORT));
-    set(44,48,'L','睡觉');
-  }
-  return {g:g.join(''),t:t,s:'',demo:1};
-}
-function seed(){
-  if(S.cfg.seeded)return;
-  S.cfg.seeded=1;save();
-}
 /* ===== 作息模板 / 目标 / 提醒 ===== */
-/* 模板时间轴：36 小时 = 昨晚 21:00 → 明早 09:00，共 72 个半小时间隔 */
 var TPL_SLOTS=72;
 var DEFROUTINE=[
- {a:6,e:20,k:'L',t:'睡觉'},      /* 00:00-07:00 */
- {a:20,e:21,k:'4',t:'走路'},     /* 07:00-07:30 */
- {a:21,e:23,k:'L',t:'洗漱早餐'}, /* 07:30-08:30 */
- {a:23,e:30,k:'4',t:'骑车通勤'}, /* 08:30-12:00 */
- {a:30,e:31,k:'L',t:'午餐'},     /* 12:00-12:30 */
- {a:31,e:32,k:'4',t:'走路'},     /* 12:30-13:00 */
- {a:32,e:42,k:'2',t:'工作'},     /* 13:00-18:00 */
- {a:42,e:43,k:'4',t:'骑车回家'}, /* 18:00-18:30 */
- {a:43,e:45,k:'L',t:'晚餐'},     /* 18:30-19:30 */
- {a:45,e:48,k:'1',t:'学习'},     /* 19:30-21:00 */
- {a:48,e:54,k:'3',t:'娱乐'}      /* 21:00-00:00 */
+ {a:6,e:20,k:'L',t:'睡觉'},
+ {a:20,e:21,k:'4',t:'走路'},
+ {a:21,e:23,k:'L',t:'洗漱早餐'},
+ {a:23,e:30,k:'4',t:'骑车通勤'},
+ {a:30,e:31,k:'L',t:'午餐'},
+ {a:31,e:32,k:'4',t:'走路'},
+ {a:32,e:42,k:'2',t:'工作'},
+ {a:42,e:43,k:'4',t:'骑车回家'},
+ {a:43,e:45,k:'L',t:'晚餐'},
+ {a:45,e:48,k:'1',t:'学习'},
+ {a:48,e:54,k:'3',t:'娱乐'}
 ];
 var DEFGOALS={1:12,2:45,3:10,4:7,5:4};
-var tplA=0,tplB=1,tplEdSeg=null,tplEdIsNew=false,tplEdCat='L';
 function ensureCfg(){
   var isFresh=!S.cfg.templates;
   if(isFresh){
     var base=S.cfg.routine?S.cfg.routine:DEFROUTINE;
     S.cfg.templates=[{name:'工作日',segs:base.map(function(x){return {a:x.a,e:x.e,k:x.k,t:x.t}})}];
     delete S.cfg.routine;
-    S.cfg.tplMigrated=1; /* 默认模板已在 36h 轴，无需迁移 */
+    S.cfg.tplMigrated=1;
   }
   if(S.cfg.curTpl===undefined||S.cfg.curTpl<0)S.cfg.curTpl=0;
   if(S.cfg.curTpl>=S.cfg.templates.length)S.cfg.curTpl=0;
-  /* 旧模板（0-47，仅当天）迁移到 36 小时轴（+6 偏移到今天区间） */
   if(!S.cfg.tplMigrated){
     S.cfg.templates.forEach(function(tp){
       tp.segs=(tp.segs||[]).map(function(s){
@@ -1559,10 +1570,9 @@ function ensureCfg(){
 }
 function getTpl(){return S.cfg.templates[S.cfg.curTpl];}
 function segAt(segs,s){for(var i=0;i<segs.length;i++){if(s>=segs[i].a&&s<segs[i].e)return segs[i];}return null;}
-/* 模板 slot 0 = 昨晚 21:00，每半小时一格，共 72 格 → 明早 09:00 */
 function tplSlotInfo(s){
-  var baseH=21, h=((baseH*2+s)%48)/2; /* 0-47 半天 → 0-23.5 小时 */
-  var dayIdx=Math.floor((baseH*2+s)/48); /* 0=昨天,1=今天,2=明天 */
+  var baseH=21, h=((baseH*2+s)%48)/2;
+  var dayIdx=Math.floor((baseH*2+s)/48);
   var dayLabel=['昨天','今天','明天'][dayIdx]||'';
   var slotInDay=(baseH*2+s)%48;
   return {h:Math.floor(h),dayIdx:dayIdx,dayLabel:dayLabel,slotInDay:slotInDay};
@@ -1603,18 +1613,13 @@ function resetTplDay(){var tp=getTpl();tp.segs=[];save();renderTplTimeline();toa
 function renderTplTimeline(){
   var tp=getTpl(), segs=tp.segs||[], el=document.getElementById('tplTimeline'), h='';
   for(var k=0;k<36;k++){
-    var s=k*2; /* 每个小时块包含 2 个模板半小时间隔 */
-    var info=tplSlotInfo(s), hh=info.h;
-    var isDayStart=(hh===0);
-    var dayLabel=info.dayLabel;
+    var s=k*2, info=tplSlotInfo(s), hh=info.h, isDayStart=(hh===0), dayLabel=info.dayLabel;
     h+='<div class="hblock'+(isDayStart?' daystart':'')+'">';
     h+='<div class="hhour">'+(hh<10?'0'+hh:hh)+':00'+(isDayStart||k===0?' <span class="hday">'+dayLabel+'</span>':'')+'</div>';
     h+='<div class="hbody">';
     [s,s+1].forEach(function(slot){
-      var seg=segAt(segs,slot), cat=seg?(CMAP[seg.k]||LIFE):null;
-      var fill=cat?'background:'+cat.c:'', cls=seg?'':' empty', lbl='';
-      if(seg){lbl=seg.t||(cat?cat.n:'');}
-      h+='<div class="hslot'+cls+'" data-slot="'+slot+'" onclick="tplTap('+slot+')"><div class="hfill" style="'+fill+'"></div>'+(lbl?'<span class="tlab" style="color:'+(cat?txtOn(cat.c):'#454545')+'">'+esc(lbl)+'</span>':'')+'</div>';
+      var seg=segAt(segs,slot), cat=seg?(CMAP[seg.k]||LIFE):null, fill=cat?'background:'+cat.c:'', cls=seg?'':' empty', lbl=seg?(seg.t||(cat?cat.n:'')):'';
+      h+='<div class="hslot'+cls+'" data-slot="'+slot+'" onclick="tplTap('+slot+')"><div class="hfill" style="'+fill+'"></div>'+(lbl?'<span class="tlab" style="color:'+(cat?txtOn(cat.c):'var(--tx2)')+'">'+esc(lbl)+'</span>':'')+'</div>';
     });
     h+='</div></div>';
   }
@@ -1622,9 +1627,7 @@ function renderTplTimeline(){
 }
 function tplTap(s){
   var tp=getTpl(), seg=segAt(tp.segs,s);
-  tplEdSeg=seg; tplEdIsNew=!seg;
-  tplA=seg?seg.a:s; tplB=seg?(seg.e):(s+1);
-  tplEdCat=seg?seg.k:'L';
+  tplEdSeg=seg; tplA=seg?seg.a:s; tplB=seg?(seg.e):(s+1); tplEdCat=seg?seg.k:'L';
   renderTplCats();
   document.getElementById('tplFrom').textContent=tplSlotLab(tplA);
   document.getElementById('tplTo').textContent=tplSlotLab(tplB);
@@ -1636,7 +1639,7 @@ function renderTplCats(){
   var h='';CATS.concat([LIFE]).forEach(function(c){
     h+='<button class="cp'+(tplEdCat===c.k?' on':'')+'" onclick="tplEdCat=\''+c.k+'\';renderTplCats()"><i style="background:'+c.c+'"></i>'+esc(c.n)+'</button>';
   });
-  h+='<button class="cp'+(tplEdCat==='.'?' on':'')+'" onclick="tplEdCat=\'.\';renderTplCats()"><i style="background:#EFEEE9;border:1px solid #D3D1C7"></i>不分类</button>';
+  h+='<button class="cp'+(tplEdCat==='.'?' on':'')+'" onclick="tplEdCat=\'.\';renderTplCats()"><i style="background:var(--empn);border:1px solid var(--line2)"></i>不分类</button>';
   document.getElementById('tplCats').innerHTML=h;
 }
 function tplStepTo(n){
@@ -1656,6 +1659,7 @@ function delTplSeg(){
   closeTpl();renderTplTimeline();
 }
 function closeTpl(){var m=document.getElementById('tplMask');if(m)m.classList.remove('on');}
+var tplA=0,tplB=1,tplEdSeg=null,tplEdIsNew=false,tplEdCat='L';
 function renderTplPick(){
   var sel=document.getElementById('tplPick'); if(!sel)return;
   var h='';S.cfg.templates.forEach(function(tp,i){h+='<option value="'+i+'"'+(i===S.cfg.curTpl?' selected':'')+'>'+esc(tp.name||('模板'+(i+1)))+'</option>';});
@@ -1664,19 +1668,23 @@ function renderTplPick(){
 function updateApplyLbl(){var el=document.getElementById('applyDayLbl'); if(el)el.textContent=(curDate===todayStr()?'今天':cnDate(curDate));}
 function applyTemplate(idx,d){
   var tp=S.cfg.templates[idx]; if(!tp||!tp.segs||!tp.segs.length){toast('先在设置里配置作息模板');setPane('set');return;}
-  var segs=tp.segs, ns=(d===todayStr())?nowSlot():999;
+  var segs=tp.segs, nm=(d===todayStr())?minNow():1440;
   var counts={rec:0,plan:0,skip:0}, dayMap=[addD(d,-1),d,addD(d,1)];
   segs.forEach(function(seg){
     for(var slot=seg.a;slot<seg.e;slot++){
       var info=tplSlotInfo(slot);
       var targetD=dayMap[info.dayIdx]; if(!targetD)continue;
-      var targetSlot=info.slotInDay;
-      var dd=day(targetD);
-      var isAutoSleep=(dd.g[targetSlot]==='L'&&dd.t[targetSlot]==='睡觉');
-      if(((dd.g[targetSlot]!=='.')&&!isAutoSleep)||(dd.p&&dd.p[targetSlot])){counts.skip++;continue;}
-      var isPast=(targetD===todayStr())?(targetSlot<=ns):(diffD(todayStr(),targetD)>0);
-      if(isPast){var g=dd.g.split('');g[targetSlot]=seg.k;dd.g=g.join('');if(seg.t)dd.t[targetSlot]=seg.t;else delete dd.t[targetSlot];counts.rec++;}
-      else{dd.p=dd.p||{};if(!dd.p[targetSlot])dd.p[targetSlot]={c:seg.k,t:seg.t||''};counts.plan++;}
+      var minute=info.slotInDay*30;
+      var tD=targetD, mi=minute;
+      var toEv = function(cat,txt,plan){
+        var overlap=recordsOf(tD).some(function(e){return Math.max(e.s,mi)<Math.min(e.e,mi+30);});
+        var planOverlap=((S.days[tD]&&S.days[tD].ev)||[]).some(function(e){return e.plan&&Math.max(e.s,mi)<Math.min(e.e,mi+30);});
+        if((overlap)||planOverlap){counts.skip++;return;}
+        var isPast=(tD===todayStr())?(mi+30<=nm):(diffD(todayStr(),tD)>0);
+        if(isPast){ addEvent(tD,{id:uid(),gid:uid(),cat:cat,s:mi,e:mi+30,t:txt,plan:false}); counts.rec++; }
+        else { addEvent(tD,{id:uid(),gid:uid(),cat:cat,s:mi,e:mi+30,t:txt,plan:true}); counts.plan++; }
+      };
+      toEv(seg.k, seg.t||'', false);
     }
   });
   save();renderRec();renderToday();renderStat();
@@ -1686,12 +1694,12 @@ function weekDays(){var t=new Date(),dw=(t.getDay()+6)%7;var st=new Date(t);st.s
 function renderGoals(){
   var ge=document.getElementById('goalWeekRange');if(ge)ge.textContent='';
   var gb=document.getElementById('goalBody');if(!gb)return;
-  var wd=weekDays(), st=tally(wd);
+  var wd=weekDays(), st=tallyEv(wd);
   if(ge)ge.textContent=cnDate(wd[0]).replace(/ 周./,'')+' — '+cnDate(wd[6]).replace(/ 周./,'');
   var goals=S.cfg.goals||{}, h='';
   CATS.forEach(function(x){
     var goal=goals[x.k]||0; if(goal<=0)return;
-    var act=st.c[x.k]/2, pct=Math.min(act/goal*100,100), over=act>=goal;
+    var act=st.c[x.k]/60, pct=Math.min(act/goal*100,100), over=act>=goal;
     h+='<div class="goalrow"><span class="gnm"><i style="background:'+x.c+'"></i>'+esc(x.n)+'</span>'+
       '<div class="gbar"><i style="width:'+pct.toFixed(0)+'%;background:'+x.c+'"></i><span class="gv'+(over?' over':'')+'">'+act.toFixed(1)+' / '+goal+'h</span></div></div>';
   });
@@ -1713,35 +1721,41 @@ function toggleNotify(){
     if(S.cfg.notify){toast('已开启，到点会弹通知');checkReminders();}else toast('未授权，仍会在页面内提醒');});
 }
 function checkReminders(){
-  var d=todayStr(), dd=day(d), p=dd.p||{}, ns=nowSlot(), arr=[];
-  Object.keys(p).forEach(function(k){var s=+k;if(s<=ns&&p[s])arr.push({s:s,pl:p[s]})});
+  var d=todayStr(), evs=plansOf(d), arr=[];
+  evs.forEach(function(ev){ if(ev.s<=minNow())arr.push(ev); });
   renderRemindBanner(arr);
   if(S.cfg.notify&&'Notification' in window&&Notification.permission==='granted'){
     S.cfg.notified=S.cfg.notified||{};
-    arr.forEach(function(a){var key=d+'#'+a.s;if(!S.cfg.notified[key]){S.cfg.notified[key]=1;save();
-      try{new Notification('时间到 · 该做啦',{body:slotLab(a.s)+' '+(CMAP[a.pl.c]?CMAP[a.pl.c].n:'')+(a.pl.t?(' · '+a.pl.t):'')});}catch(e){}}});
+    arr.forEach(function(ev){var key=d+'#'+ev.gid;if(!S.cfg.notified[key]){S.cfg.notified[key]=1;save();
+      try{new Notification('时间到 · 该做啦',{body:fmtHM(ev.s)+' '+(catName(ev.cat))+(ev.t?(' · '+ev.t):'')});}catch(e){}}});
   }
 }
 function renderRemindBanner(arr){
   var el=document.getElementById('remindBanner');if(!el)return;
   if(!arr.length){el.style.display='none';el.innerHTML='';return;}
   var h='<div class="remind"><div class="rtitle">⏰ 有 '+arr.length+' 项预备安排到时间了</div>';
-  arr.sort(function(a,b){return a.s-b.s}).forEach(function(a){
-    var cat=CMAP[a.pl.c]||LIFE;
-    h+='<div class="ritem"><span class="riic" style="background:'+cat.c+'"></span><span class="ritm">'+slotLab(a.s)+'</span>'+
-      '<span class="rinm"><b style="color:'+cat.c+'">'+esc(cat.n)+'</b>'+(a.pl.t?(' · '+esc(a.pl.t)):'')+'</span>'+
-      '<button class="btn sm pri" onclick="edToRecord(\''+todayStr()+'\','+a.s+')">转正式</button></div>';
+  arr.sort(function(a,b){return a.s-b.s}).forEach(function(ev){
+    h+='<div class="ritem"><span class="riic" style="background:'+catColor(ev.cat)+'"></span><span class="ritm">'+fmtHM(ev.s)+'</span>'+
+      '<span class="rinm"><b style="color:'+catColor(ev.cat)+'">'+esc(catName(ev.cat))+'</b>'+(ev.t?(' · '+esc(ev.t)):'')+'</span>'+
+      '<button class="btn sm pri" onclick="edToRecordById(\''+todayStr()+'\',\''+(ev.gid||ev.id)+'\')">转正式</button></div>';
   });
   h+='</div>';el.innerHTML=h;el.style.display='block';
 }
+function edToRecordById(d,gid){
+  var ev=eventsOf(d).filter(function(e){return (e.gid||e.id)===gid;})[0];
+  if(!ev)return;
+  if(!editableEv(d,ev.s)){toast('这段还不可转为正式记录');return;}
+  ev.plan=false; save();renderRec();renderToday();renderStat();
+  toast('已转为正式记录 '+fmtHM(ev.s)+' · '+catName(ev.cat));
+}
+
 /* ===== 启动 ===== */
-load();seed();ensureCfg();
-axisStartDay=addD(todayStr(),-BACK);axisDayCount=BACK+FWD+1;
+load();ensureCfg();
 document.getElementById('wxSw').classList.toggle('on',S.cfg.autoWx!==false);
 document.getElementById('notifySw').classList.toggle('on',S.cfg.notify);
 document.getElementById('todayModal').onclick=function(e){if(e.target===this)closeToday()};
-renderRec();centerNow();renderToday();renderIdeas();renderCatMgr();storeInfo();refreshCloudStat();renderTplEditor();renderGoalList();renderGoals();checkReminders();setSV('day');
-setInterval(function(){if(curDate===todayStr()){renderTimeline(false);renderQbar();renderToday();checkReminders();}},60000);
+renderRec();renderToday();renderIdeas();renderCatMgr();storeInfo();refreshCloudStat();renderTplEditor();renderGoalList();renderGoals();checkReminders();setSV('day');
+setInterval(function(){if(curDate===todayStr()){renderTimeline();renderQbar();renderToday();checkReminders();}},60000);
 </script>
 </body>
 </html>
