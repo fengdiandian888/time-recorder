@@ -1099,14 +1099,15 @@ function tapCapsule(d,hour){
   if(permLocked(d)){ toast('这一天已锁定'); return; }
   openCapsule(d,hour,null);
 }
-/* 仅显示层合并：连续 + 同分类 + 两段备注都为空 → 合成一行（不改存储数据 S.days[d].ev）
+/* 仅显示层合并：连续 + 同分类 + 计划状态相同 → 合成一行（不改存储数据 S.days[d].ev）
    merged 元素：{s,e,cat,t,gid,plan,n}，n 为合并段数；gid 保留第一段的 id，点击仍编辑第一段
-   任一段有 t 就独立；不紧邻 / 不同 cat / 计划状态不同 都不合并 */
+   合并条件（备注相容）：两段都无备注，或两段备注完全相同；备注不同（写了不同具体活动）则各自独立
+   不紧邻 / 不同 cat / 计划状态不同 都不合并 */
 function mergeContinuousSegments(evs){
   var merged=[];
   for(var mi=0;mi<evs.length;mi++){
     var ev=evs[mi], last=merged[merged.length-1];
-    if(last && !last.t && !ev.t && last.cat===ev.cat && last.e===ev.s && last.plan===ev.plan){
+    if(last && last.cat===ev.cat && last.e===ev.s && last.plan===ev.plan && ( (!last.t && !ev.t) || (last.t && ev.t && last.t===ev.t) )){
       last.e=ev.e; last.n++;
     }else{
       merged.push({s:ev.s,e:ev.e,cat:ev.cat,t:ev.t||'',gid:ev.gid||ev.id,plan:!!ev.plan,n:1});
