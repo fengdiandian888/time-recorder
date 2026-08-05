@@ -231,6 +231,7 @@ background-image:repeating-linear-gradient(0deg,rgba(255,255,255,.26),rgba(255,2
 .segrow .sbtn{font-size:12px;color:var(--acc);padding:4px 8px;border-radius:7px}
 .segrow .sbtn:active{background:var(--empn)}
 .segrow .sbtn.del{color:var(--red)}
+.segrow.current{background:var(--empn);border-radius:7px;margin:2px 0}
 .rtrow{display:flex;align-items:center;gap:6px;margin-bottom:7px;flex-wrap:wrap}
 .rtrow select{min-height:38px;padding:6px 8px;border:1px solid var(--line2);border-radius:8px;background:#fff;font-size:13px}
 .rtrow input[type=text]{flex:1;min-width:90px;min-height:38px}
@@ -1237,14 +1238,18 @@ function renderSegList(){
   var evs=eventsOf(edDay);
   var box=document.getElementById('edSegList');
   if(!evs.length){box.innerHTML='<div class="mut3" style="padding:10px;font-size:12px">当天还没有段落</div>';return;}
-  box.innerHTML=evs.map(function(ev){
+  var merged=mergeContinuousSegments(evs);
+  var clickMin=(typeof edHour==='number')?edHour*60:-1;
+  box.innerHTML=merged.map(function(ev){
     var cat=CMAP[ev.cat]||LIFE;
     var rng=fmtHM(ev.s)+'-'+fmtHM(ev.e%1440);
     var gid=ev.gid||ev.id;
-    return '<div class="segrow"><span class="sstripe" style="background:'+catColor(ev.cat)+'"></span>'+
+    var isCurrent=(clickMin>=ev.s && clickMin<ev.e);
+    var noteHtml=esc(ev.t||'')+(ev.n>1?'<span class="mut3">（连续'+ev.n+'段）</span>':'');
+    return '<div class="segrow'+(isCurrent?' current':'')+'"><span class="sstripe" style="background:'+catColor(ev.cat)+'"></span>'+
       '<span class="srange">'+rng+'</span>'+
       '<span class="scat" style="color:'+txtOn(catColor(ev.cat))+'">'+esc(cat.n)+(ev.plan?'（计划）':'')+'</span>'+
-      '<span class="snote">'+esc(ev.t||'')+'</span>'+
+      '<span class="snote">'+noteHtml+'</span>'+
       '<button class="sbtn" onclick="editEvent(\''+edDay+'\',\''+gid+'\')">改</button>'+
       '<button class="sbtn del" onclick="delEvent(\''+edDay+'\',\''+gid+'\');renderSegList();renderRec();toast(\'已删除该段\')">删</button></div>';
   }).join('');
